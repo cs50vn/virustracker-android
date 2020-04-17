@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Dev stage
-      run: ./.github/scripts/ci-dev.sh
+      run: scripts/ci-dev.sh
