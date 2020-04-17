@@ -1,0 +1,12 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - feature/v1
+
+jobs:
+  build:
+    steps:
+    - name: Run a one-line script
+      run: echo Hello, world!
