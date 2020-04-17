@@ -1,0 +1,110 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+    defaultConfig {
+        applicationId rootProject.applicationId
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode rootProject.versionCode
+        versionName rootProject.versionName
+        multiDexEnabled true
+    }
+    
+    signingConfigs {
+        release {
+            storeFile file("src/main/key,jks")
+            storePassword "123456"
+            keyAlias "tracker"
+            keyPassword "123456"
+        }
+    }
+    
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            ext.enableCrashlytics = false
+            ext.alwaysUpdateBuildId = false
+        }
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            java.srcDirs = ['src/main/java']
+            res.srcDirs = ['src/main/res']
+            jniLibs.srcDirs = ['src/main/libs']
+        }
+
+       /*
+       //Enable in next version
+        test {
+            java.srcDirs += ['src/main/java']
+
+        }
+
+        androidTest {
+            java.srcDirs = ['src/main/java']
+        }*/
+    }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+    lintOptions {
+        disable 'RestrictedApi'
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'src/main/libs'
+    }
+}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersionX"
+    implementation "androidx.cardview:cardview:$rootProject.cardViewVersionX"
+    implementation "com.google.android.material:material:$rootProject.materialVersionX"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersionX"
+    implementation "androidx.vectordrawable:vectordrawable:$rootProject.vectorDrawableVersionX"
+    implementation "androidx.legacy:legacy-support-v4:$rootProject.supportV4LibraryVersionX"
+    implementation "androidx.recyclerview:recyclerview:$rootProject.recyclerViewVersionX"
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersionX"
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.swipeRefreshLayout"
+    implementation "net.lingala.zip4j:zip4j:$rootProject.zip4j"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$rootProject.lifecycleVersionX"
+    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttp"
+    implementation "com.facebook.shimmer:shimmer:$rootProject.shimmer"
+    implementation "com.nostra13.universalimageloader:universal-image-loader:1.9.5"
+
+    //Test section
+    testImplementation "junit:junit:$rootProject.jUnitVersion"
+    // Core library
+    androidTestImplementation "androidx.test:core:$rootProject.testCoreVersion"
+
+    // AndroidJUnitRunner and JUnit Rules
+    androidTestImplementation "androidx.test:runner:$rootProject.jUnitRunner"
+    androidTestImplementation "androidx.test:rules:$rootProject.jUnitRunner"
+
+    // Assertions
+    androidTestImplementation "androidx.test.ext:junit:$rootProject.assertionVersion"
+    androidTestImplementation "androidx.test.ext:truth:$rootProject.assertionVersion"
+    androidTestImplementation "com.google.truth:truth:0.42"
+
+    // Espresso dependencies
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$rootProject.espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$rootProject.espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-accessibility:$rootProject.espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-web:$rootProject.espressoVersion"
+    androidTestImplementation "androidx.test.espresso.idling:idling-concurrent:$rootProject.espressoVersion"
+
+    //Mockito
+    testImplementation 'org.mockito:mockito-core:3.2.4'
+}
