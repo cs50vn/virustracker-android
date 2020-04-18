@@ -11,5 +11,4 @@ jobs:
     steps:
     - name: Dev stage
       run: | 
-        chmod 740 ./scripts/ci-dev.sh
-        ./scripts/ci-dev.sh
+        ls -l
