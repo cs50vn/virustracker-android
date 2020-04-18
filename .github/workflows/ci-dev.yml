@@ -10,4 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Dev stage
-      run: ./scripts/ci-dev.sh
+      run: | 
+        chmod 740 ./scripts/ci-dev.sh
+        ./scripts/ci-dev.sh
