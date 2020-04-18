@@ -23,7 +23,7 @@ $ROOT_DIR/make.sh debug
 
 #Deploy apk to hosting
 echo -e "\n*****  3  *****"
-#$ROOT_DIR/deploy-dev.sh debug $B2_APP_ID $B2_APP_KEY
+$ROOT_DIR/deploy-dev.sh debug $B2_APP_ID $B2_APP_KEY
 
 #Email a download link
 #echo -e "\n*****  4  *****"
