@@ -15,3 +15,5 @@ jobs:
       run: | 
         ls -l -a
         pwd
+        echo $PWD
+        ./scripts/ci-dev.sh $PWD
