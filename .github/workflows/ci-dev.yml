@@ -13,4 +13,5 @@ jobs:
       uses: actions/checkout@v2
     - name: Dev stage
       run: | 
-        ls -l
+        ls -l -a 
+        pwd
