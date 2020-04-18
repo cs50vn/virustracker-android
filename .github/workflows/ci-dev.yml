@@ -19,10 +19,4 @@ jobs:
         B2_APP_ID: ${{ secrets.B2_APP_ID }}
         B2_APP_KEY: ${{ secrets.B2_APP_KEY }}
       run: | 
-        ls -l -a
-        pwd
-        echo $PWD
-        echo "$TEST"
-        echo "====="
-        chmod 740 ./.ci/scripts/ci-dev.sh
         ./.ci/scripts/ci-dev.sh $PWD
