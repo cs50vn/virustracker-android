@@ -16,6 +16,5 @@ jobs:
         ls -l -a
         pwd
         echo $PWD
-        echo ${{ secrets.TEST }}
         chmod 740 ./.ci/scripts/ci-dev.sh
         ./.ci/scripts/ci-dev.sh $PWD
