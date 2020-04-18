@@ -18,7 +18,7 @@ echo -e "\n*****  1  *****"
 $ROOT_DIR/make-data.sh
 
 #Compile app
-#echo -e "\n*****  2  *****"
+echo -e "\n*****  2  *****"
 $ROOT_DIR/make.sh debug
 
 #Deploy apk to hosting
