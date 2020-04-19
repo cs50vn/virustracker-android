@@ -5,7 +5,6 @@ Virus tracker Android
 ## Third party libs
 1. okhttp
 
-
 ## Build tools
 1. Android SDK tool
     - Linux: https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
