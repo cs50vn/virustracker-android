@@ -6,21 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.cs50vn.virustracker.app.R;
-import com.cs50vn.virustracker.app.appmodel.AppViewModel;
-import com.cs50vn.virustracker.app.appmodel.HomeViewModel;
 import com.cs50vn.virustracker.app.tracking.PLog;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment {
+public class CountryDetailFragment extends Fragment {
 
-    HomeViewModel homeViewModel;
-
-    public HomeFragment() {
+    public CountryDetailFragment() {
 
     }
 
@@ -33,12 +28,6 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-        homeViewModel = ViewModelProviders.of(this.getActivity()).get(HomeViewModel.class);
-
-        homeViewModel.getTopHome().observe(this, appItem -> {
-
-        });
 
         return view;
     }

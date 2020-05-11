@@ -7,7 +7,11 @@ import com.cs50vn.virustracker.app.controller.AssetManager;
 import com.cs50vn.virustracker.app.controller.BitmapManager;
 import com.cs50vn.virustracker.app.tracking.PLog;
 
+import java.time.Duration;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
 
 public class AppRepository {
     private static AppRepository instance;
@@ -18,6 +22,7 @@ public class AppRepository {
         noDataMode = new MutableLiveData<>();
         noDataRetryMode = new MutableLiveData<>();
         splashScreenMode = new MutableLiveData<>();
+        hideNavigationMode = new MutableLiveData<>();
     }
 
     public static AppRepository getInstance() {
@@ -37,6 +42,8 @@ public class AppRepository {
     private boolean internalNoDataRetryMode = false;
     private MutableLiveData<Boolean> splashScreenMode;
     private boolean internalSplashScreenMode = true;
+    private MutableLiveData<Boolean> hideNavigationMode;
+    private boolean internalHideNavigationMode = true;
 
     private Context ctx;
 
@@ -44,6 +51,7 @@ public class AppRepository {
     private CountryRepository countryRepository;
     private AppDAO appDAO;
     private AssetManager bitmapManager;
+    private OkHttpClient client = new OkHttpClient.Builder().callTimeout(10, TimeUnit.SECONDS).build();
 
     public void init(Context ctx) {
         this.ctx = ctx;
@@ -70,6 +78,11 @@ public class AppRepository {
     public AssetManager getBitmapManager() {
         return bitmapManager;
     }
+
+    public OkHttpClient getClient() {
+        return client;
+    }
+
 
     public LiveData<Boolean> isOfflineMode() {
         return offlineMode;
@@ -111,6 +124,16 @@ public class AppRepository {
         this.internalSplashScreenMode = status;
 
         splashScreenMode.postValue(internalSplashScreenMode);
+    }
+
+    public LiveData<Boolean> isHideNavigationMode() {
+        return hideNavigationMode;
+    }
+
+    public void setHideNavigationMode(boolean status) {
+        this.internalHideNavigationMode = status;
+
+        hideNavigationMode.postValue(internalHideNavigationMode);
     }
 
     public void destroy() {

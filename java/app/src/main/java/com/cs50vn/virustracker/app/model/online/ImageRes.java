@@ -9,6 +9,14 @@ public class ImageRes {
     private Bitmap rawData;
     private long timestamp;
 
+    public ImageRes() {
+        this.id = "";
+        this.url = "";
+        this.data = "";
+        this.rawData = null;
+        this.timestamp = 0;
+    }
+
     public ImageRes(String id, String url, String data, Bitmap rawData, long timestamp) {
         this.id = id;
         this.url = url;

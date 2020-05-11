@@ -45,4 +45,8 @@ public class AppViewModel extends AndroidViewModel {
     public LiveData<Boolean> isNoDataRetryMode() {
         return appRepository.isNoDataRetryMode();
     }
+
+    public LiveData<Boolean> isHideNavigationMode() {
+        return appRepository.isHideNavigationMode();
+    }
 }

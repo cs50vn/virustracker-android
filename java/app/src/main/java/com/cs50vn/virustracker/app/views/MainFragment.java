@@ -25,6 +25,7 @@ public class MainFragment extends Fragment {
     private HomeFragment homeFragment;
     private CountryFragment countryFragment;
     private AboutFragment aboutFragment;
+    private CountryDetailFragment countryDetailFragment;
 
     private AppViewModel appViewModel;
 
@@ -74,6 +75,7 @@ public class MainFragment extends Fragment {
         homeFragment = new HomeFragment();
         countryFragment = new CountryFragment();
         aboutFragment = new AboutFragment();
+        countryDetailFragment = new CountryDetailFragment();
 
     }
 
@@ -109,6 +111,14 @@ public class MainFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
         appViewModel = ViewModelProviders.of(this.getActivity()).get(AppViewModel.class);
+        BottomNavigationView navigation = view.findViewById(R.id.app_navigation);
+
+        appViewModel.isHideNavigationMode().observe(this, status -> {
+            if (status)
+                navigation.setVisibility(View.GONE);
+            else
+                navigation.setVisibility(View.VISIBLE);
+        });
 
         return view;
     }

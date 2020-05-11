@@ -5,6 +5,10 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.SystemClock;
 
+import com.cs50vn.virustracker.app.model.online.AppItem;
+import com.cs50vn.virustracker.app.model.online.Continent;
+import com.cs50vn.virustracker.app.model.online.Country;
+import com.cs50vn.virustracker.app.model.online.Version;
 import com.cs50vn.virustracker.app.utils.AppConfig;
 import com.cs50vn.virustracker.app.utils.AppUtils;
 import com.cs50vn.virustracker.app.APIRequest;
@@ -15,6 +19,9 @@ import com.cs50vn.virustracker.app.tracking.PLog;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 public class AppLoaderWorker extends AsyncTask<Context, Void, Void> {
     private AppRepository appRepository;
@@ -70,9 +77,83 @@ public class AppLoaderWorker extends AsyncTask<Context, Void, Void> {
 
         appRepository.init(ctx);
 
-        SystemClock.sleep(2000);
+
+        String data = APIRequest.getVersionStatus(AppUtils.getVersionFromAssets(ctx).getVersionId());
+        PLog.WriteLog(PLog.MAIN_TAG, data);
+
+        if (!data.equals("")) {
+            try {
+                JSONObject responseObj = new JSONObject(data);
+                int statusCode = responseObj.getInt("statusCode");
+                if (statusCode == 200) {
+                    //Parse version status
+                    int requestVersionCode, hasNewVersion;
+                    String status, downloadLink;
+                    JSONObject obj = responseObj.getJSONObject("data");
+                    hasNewVersion = obj.getInt("hasNewVersion");
+                    status = obj.getString("status");
+                    downloadLink = obj.getString("downloadLink");
+
+                    //Write to preferences
+                    SharedPreferences pref = ctx.getSharedPreferences("virustracker", ctx.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putInt("hasNewVersion", hasNewVersion);
+                    editor.putString("status", status);
+                    editor.putString("downloadLink", downloadLink);
+                    editor.commit();
+                    if (hasNewVersion == 1 && status == "force_update") {
+
+                    } else {
+                        getTopAll();
+                    }
+
+
+                }
+
+
+            }  catch (Exception e) {
+                PLog.WriteLog(PLog.MAIN_TAG, "Could not parse version status !!!");
+                PLog.WriteLog(PLog.MAIN_TAG, e.toString());
+                e.printStackTrace();
+            }
+
+        } else {
+
+        }
 
         return null;
+    }
+
+    private void getTopAll() {
+        String data = APIRequest.getTopAll();
+        PLog.WriteLog(PLog.MAIN_TAG, data);
+
+        if (!data.equals("")) {
+            try {
+                JSONObject obj = new JSONObject(data);
+                int statusCode = obj.getInt("statusCode");
+                if (statusCode == 200) {
+                    AppItem appItem = AppUtils.parseAppItemFromJSON(obj.getJSONObject("data").getString("tophome"));
+                    HashMap<String, Continent> continentList = AppUtils.parseContinentListFromJSON(obj.getJSONObject("data").getJSONObject("topcountry").getString("continentList"));
+                    LinkedList<Country> countryList = AppUtils.parseCountryListFromJSON(continentList, obj.getJSONObject("data").getJSONObject("topcountry").getString("countryList"));
+
+                    AppRepository.getInstance().getHomeRepository().setInternalAppItem(appItem);
+                    AppRepository.getInstance().getCountryRepository().setContinentList(continentList);
+                    AppRepository.getInstance().getCountryRepository().setInternalCountryList(countryList);
+
+                    PLog.WriteLog(PLog.MAIN_TAG, continentList.size());
+                    PLog.WriteLog(PLog.MAIN_TAG, countryList.size());
+                }
+
+            } catch (Exception e) {
+
+            }
+
+        } else {
+
+        }
+
+
     }
 
     @Override

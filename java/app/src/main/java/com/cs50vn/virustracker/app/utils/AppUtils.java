@@ -8,9 +8,19 @@ import android.os.Environment;
 import android.util.Base64;
 
 import com.cs50vn.virustracker.app.appmodel.AppRepository;
+import com.cs50vn.virustracker.app.model.online.AppItem;
+import com.cs50vn.virustracker.app.model.online.Continent;
+import com.cs50vn.virustracker.app.model.online.Country;
+import com.cs50vn.virustracker.app.model.online.ImageRes;
+import com.cs50vn.virustracker.app.model.online.Item;
+import com.cs50vn.virustracker.app.model.online.RecentItem;
+import com.cs50vn.virustracker.app.model.online.Version;
 import com.cs50vn.virustracker.app.tracking.PLog;
 
 import net.lingala.zip4j.ZipFile;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,8 +30,145 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedList;
 
 public class AppUtils {
+
+    public static Date convertUnixTimeToDate(long timestamp){
+        return new Date(timestamp * 100);
+    }
+
+    public static Version parseVersionFromJSON(String data) {
+        Version version = null;
+
+        try {
+            int id;
+            String status, downloadLink;
+            JSONObject obj = new JSONObject(data);
+            id = obj.getInt("" );
+
+        } catch (Exception e) {
+            PLog.WriteLog(PLog.MAIN_TAG, "Could not parse tournament detail content !!!");
+            PLog.WriteLog(PLog.MAIN_TAG, e.toString());
+            e.printStackTrace();
+
+        }
+        return version;
+    }
+
+    public static HashMap<String, Continent> parseContinentListFromJSON(String data) {
+        HashMap<String, Continent> list = new HashMap<>();
+
+        try {
+            JSONArray arr = new JSONArray(data);
+            for (int index = 0; index < arr.length(); index++) {
+                JSONObject obj = arr.getJSONObject(index);
+                String id = obj.getString("id");
+                String name = obj.getString("name");
+                list.put(id, new Continent(id, name, 0));
+            }
+
+        } catch (Exception e) {
+            PLog.WriteLog(PLog.MAIN_TAG, "Could not parseContinentListFromJSON() !!!");
+            PLog.WriteLog(PLog.MAIN_TAG, e.toString());
+            e.printStackTrace();
+
+        }
+        return list;
+    }
+
+    public static LinkedList<Country> parseCountryListFromJSON(HashMap<String, Continent> continentList, String data) {
+        LinkedList<Country> list = new LinkedList();
+
+        try {
+            JSONArray arr = new JSONArray(data);
+            for (int index = 0; index < arr.length(); index++) {
+                JSONObject obj = arr.getJSONObject(index);
+                String id = obj.getString("id");
+                String name = obj.getString("name");
+                ImageRes res = new ImageRes(obj.getString("flagId"), obj.getString("flagUrl"), obj.getString("flagData"), null, obj.getLong("flagTimestamp"));
+                Long timestamp = obj.getLong("timestamp");
+                LinkedList<Item> items = new LinkedList<>();
+                String continentId = obj.getString("continentId");
+
+                items.add(new Item(obj.getLong("totalCases"), obj.getLong("newCases"), obj.getLong("totalDeaths")));
+                list.add(new Country(id, name, "", 0, 0, res, timestamp, continentList.get(continentId), items));
+            }
+
+        } catch (Exception e) {
+            PLog.WriteLog(PLog.MAIN_TAG, "Could not parseCountryListFromJSON !!!");
+            PLog.WriteLog(PLog.MAIN_TAG, e.toString());
+            e.printStackTrace();
+
+        }
+        return list;
+    }
+
+    public static AppItem parseAppItemFromJSON(String data) {
+        AppItem appItem = new AppItem();
+
+        try {
+            long timestamp, totalCases, newCases, totalDeaths, newDeaths, totalRecovered;
+            LinkedList<Continent> totalCasesChart = new LinkedList<>();
+            LinkedList<Continent> totalDeathsChart = new LinkedList<>();
+            LinkedList<RecentItem> totalCasesRecent = new LinkedList<>();
+            LinkedList<RecentItem> totalDeathsRecent = new LinkedList<>();
+            JSONObject obj = new JSONObject(data);
+
+            timestamp = obj.getInt("timestamp");
+            totalCases = obj.getInt("totalCases");
+            newCases = obj.getInt("newCases");
+            totalDeaths = obj.getInt("totalDeaths");
+            newDeaths = obj.getInt("newDeaths");
+            totalRecovered = obj.getInt("totalRecovered");
+            totalCasesChart = parseChartItemFromJSON(obj.getString("totalCasesChart"));
+            totalDeathsChart = parseChartItemFromJSON(obj.getString("totalDeathsChart"));
+            totalCasesRecent = parseRecentItemFromJSON(obj.getString("totalCasesRecent"));
+            totalDeathsRecent = parseRecentItemFromJSON(obj.getString("totalDeathsRecent"));
+
+            appItem = new AppItem(timestamp, totalCases, newCases, totalDeaths, newDeaths, totalRecovered, totalCasesChart, totalDeathsChart, totalCasesRecent, totalDeathsRecent);
+        } catch (Exception e) {
+            PLog.WriteLog(PLog.MAIN_TAG, "Could not parse tournament detail content !!!");
+            PLog.WriteLog(PLog.MAIN_TAG, e.toString());
+            e.printStackTrace();
+
+        }
+        return appItem;
+    }
+
+    public static LinkedList<Continent> parseChartItemFromJSON(String data) {
+        LinkedList<Continent> list = new LinkedList<>();
+        try {
+            JSONArray arr = new JSONArray(data);
+            for (int index = 0; index < arr.length(); index++) {
+                JSONObject obj = arr.getJSONObject(index);
+                list.add(new Continent(obj.getString("continentId"), obj.getString("continentName"), obj.getLong("value")));
+            }
+
+        } catch (Exception e) {
+
+        }
+
+        return list;
+    }
+
+    public static LinkedList<RecentItem> parseRecentItemFromJSON(String data) {
+        LinkedList<RecentItem> list = new LinkedList<>();
+        try {
+            JSONArray arr = new JSONArray(data);
+            for (int index = 0; index < arr.length(); index++) {
+                JSONObject obj = arr.getJSONObject(index);
+                list.add(new RecentItem(obj.getLong("continentId"), obj.getInt("continentName")));
+            }
+
+        } catch (Exception e) {
+
+        }
+
+        return list;
+    }
 
     public static AppVersion getVersionFromAssets(Context ctx) {
         String appVersion = "";
