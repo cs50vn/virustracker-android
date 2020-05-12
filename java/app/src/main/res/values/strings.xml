@@ -1,9 +1,13 @@
 <resources>
     <string name="app_name">Virus Tracker</string>
-    <string name="title_home">Home</string>
+    <string name="title_home">World</string>
     <string name="title_country">Country</string>
     <string name="title_about">About</string>
 
     <string name="no_data">Không có dữ liệu hiển thị.\nVui lòng thử lại. </string>
-
+    <string name="total_cases_title">Total Cases</string>
+    <string name="new_cases_title">New Cases</string>
+    <string name="total_deaths_title">Total Deaths</string>
+    <string name="new_deaths_title">New Deaths</string>
+    <string name="total_recovered_title">Total Recovered</string>
 </resources>

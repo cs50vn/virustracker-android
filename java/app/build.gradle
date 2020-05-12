@@ -82,6 +82,7 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttp"
     implementation "com.facebook.shimmer:shimmer:$rootProject.shimmer"
     implementation "com.nostra13.universalimageloader:universal-image-loader:1.9.5"
+    implementation "com.github.PhilJay:MPAndroidChart:v3.1.0"
 
     //Test section
     testImplementation "junit:junit:$rootProject.jUnitVersion"
