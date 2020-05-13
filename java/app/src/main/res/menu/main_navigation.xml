@@ -3,16 +3,16 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/ic_world_24dp"
         android:title="@string/title_home" />
 
     <item
         android:id="@+id/navigation_country"
-        android:icon="@drawable/ic_tournament_24dp"
+        android:icon="@drawable/ic_country_24dp"
         android:title="@string/title_country" />
 
     <item
         android:id="@+id/navigation_about"
-        android:icon="@drawable/ic_academy_24dp"
+        android:icon="@drawable/ic_setting_24dp"
         android:title="@string/title_about" />
 </menu>

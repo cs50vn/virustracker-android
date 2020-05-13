@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+ xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="360dp"
+    android:orientation="vertical"
+    android:padding="16dp"
+
+    >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Filter by"
+        android:fontFamily="@font/opensans_extrabold"
+        android:textSize="16dp"
+        android:paddingBottom="8dp"
+        />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="8dp">
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="North America"
+            android:fontFamily="@font/opensans_bold"
+            android:textSize="12dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            />
+        <RadioButton
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="South America"
+            android:fontFamily="@font/opensans_bold"
+            android:textSize="12dp"/>
+        <RadioButton
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Asia"
+            android:fontFamily="@font/opensans_bold"
+            android:textSize="12dp"/>
+        <RadioButton
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Africa"
+            android:fontFamily="@font/opensans_bold"
+            android:textSize="12dp"/>
+        <RadioButton
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Europe"
+            android:fontFamily="@font/opensans_bold"
+            android:textSize="12dp"/>
+        <RadioButton
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Other"
+            android:fontFamily="@font/opensans_bold"
+            android:textSize="12dp"/>
+        <RadioButton
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Oceania"
+            android:fontFamily="@font/opensans_bold"
+            android:textSize="12dp"/>
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sort by"
+        android:fontFamily="@font/opensans_extrabold"
+        android:textSize="16dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="8dp"
+        />
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="8dp">
+        <RadioButton
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total Cases"
+            android:fontFamily="@font/opensans_bold"
+            android:textSize="12dp"/>
+        <RadioButton
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="New Cases"
+            android:fontFamily="@font/opensans_bold"
+            android:textSize="12dp"/>
+        <RadioButton
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total Deaths"
+            android:fontFamily="@font/opensans_bold"
+            android:textSize="12dp"/>
+    </RadioGroup>
+</LinearLayout>

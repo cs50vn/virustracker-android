@@ -43,7 +43,7 @@ public class MainFragment extends Fragment {
                     switchFragment(countryFragment);
                     return true;
                 case R.id.navigation_about:
-                    switchFragment(aboutFragment);
+                    switchFragment(countryDetailFragment);
                     return true;
             }
             return false;
@@ -90,15 +90,15 @@ public class MainFragment extends Fragment {
 
             trans.show(homeFragment);
             trans.hide(countryFragment);
-            trans.hide(aboutFragment);
+            trans.hide(countryDetailFragment);
         } else if (className.equals("CountryFragment")) {
             trans.hide(homeFragment);
             trans.show(countryFragment);
-            trans.hide(aboutFragment);
-        } if (className.equals("AboutFragment")) {
+            trans.hide(countryDetailFragment);
+        } if (className.equals("CountryDetailFragment")) {
             trans.hide(homeFragment);
             trans.hide(countryFragment);
-            trans.show(aboutFragment);
+            trans.show(countryDetailFragment);
         }
 
         trans.commit();
@@ -135,7 +135,7 @@ public class MainFragment extends Fragment {
         FragmentTransaction trans = getChildFragmentManager().beginTransaction();
         trans.add(R.id.app_content, homeFragment);
         trans.add(R.id.app_content, countryFragment);
-        trans.add(R.id.app_content, aboutFragment);
+        trans.add(R.id.app_content, countryDetailFragment);
         trans.commit();
 
         //Init app fragment

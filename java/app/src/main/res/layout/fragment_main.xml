@@ -24,16 +24,21 @@
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#979797"
+        />
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/app_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
-        android:background="@color/colorNormalBackground"
         app:itemTextColor="@color/tab"
         app:itemIconTint="@color/tab"
         app:menu="@menu/main_navigation"
+        android:theme="@style/Widget.BottomNavigationView14"
 
         />
 
