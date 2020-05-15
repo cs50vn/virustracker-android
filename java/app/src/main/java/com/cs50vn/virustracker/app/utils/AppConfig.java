@@ -1,5 +1,10 @@
 package com.cs50vn.virustracker.app.utils;
 
+import com.github.mikephil.charting.utils.ColorTemplate;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class AppConfig {
     public static String PACKED_DATA_NAME = "packed_data.zip";
     public static String PACKED_DATA_FOLDER_NAME = "packed_data";
@@ -16,5 +21,10 @@ public class AppConfig {
     //App
     public static String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0";
 
+    public static ArrayList<Integer> colors = new ArrayList<Integer>(Arrays.asList(
+            ColorTemplate.rgb("003f5c"), ColorTemplate.rgb("8cba51"),
+            ColorTemplate.rgb("ef5675"), ColorTemplate.rgb("ff764a"),
+            ColorTemplate.rgb("7a5195"), ColorTemplate.rgb("bc5090"),
+            ColorTemplate.rgb("ffa600")));
 
 }

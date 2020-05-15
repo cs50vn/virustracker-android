@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/component_item"
+        android:drawableLeft="@drawable/rect"
+        android:drawablePadding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="North America"
+        android:fontFamily="@font/opensans_extrabold"
+        android:paddingTop="4dp"
+        android:paddingBottom="2dp"
+        android:textSize="12dp"/>
+    <TextView
+        android:id="@+id/component_percent"
+        android:drawableLeft="@drawable/transparent"
+        android:drawablePadding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="North America"
+        android:fontFamily="@font/opensans_extrabold"
+        android:paddingBottom="4dp"
+        android:textSize="10dp"/>
+</LinearLayout>

@@ -29,15 +29,32 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.text.Collator;
+import java.text.NumberFormat;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 public class AppUtils {
 
     public static Date convertUnixTimeToDate(long timestamp){
         return new Date(timestamp * 100);
+    }
+
+    public static String convertPercent(Continent con, List<Continent> list) {
+        long total = 0;
+
+        for (Continent c: list) {
+            total += c.getValue();
+        }
+
+        NumberFormat formatter = NumberFormat.getInstance();
+
+        return String.format("%.2f", (float)con.getValue() *100 /total) + "%";
     }
 
     public static Version parseVersionFromJSON(String data) {
@@ -128,6 +145,8 @@ public class AppUtils {
             totalCasesRecent = parseRecentItemFromJSON(obj.getString("totalCasesRecent"));
             totalDeathsRecent = parseRecentItemFromJSON(obj.getString("totalDeathsRecent"));
 
+            PLog.WriteLog(PLog.MAIN_TAG, "Total items: ==" + totalCasesRecent.size());
+
             appItem = new AppItem(timestamp, totalCases, newCases, totalDeaths, newDeaths, totalRecovered, totalCasesChart, totalDeathsChart, totalCasesRecent, totalDeathsRecent);
         } catch (Exception e) {
             PLog.WriteLog(PLog.MAIN_TAG, "Could not parse tournament detail content !!!");
@@ -151,6 +170,15 @@ public class AppUtils {
 
         }
 
+        Collections.sort(list, new Comparator<Continent>() {
+            @Override
+            public int compare(Continent c1, Continent c2) {
+
+                //compare by name return Collator.getInstance().compare(c1.getName(), c2.getName());
+                return Long.compare(c2.getValue(), c1.getValue());
+            }
+        });
+
         return list;
     }
 
@@ -160,12 +188,21 @@ public class AppUtils {
             JSONArray arr = new JSONArray(data);
             for (int index = 0; index < arr.length(); index++) {
                 JSONObject obj = arr.getJSONObject(index);
-                list.add(new RecentItem(obj.getLong("continentId"), obj.getInt("continentName")));
+                list.add(new RecentItem(obj.getLong("timestamp"), obj.getInt("value")));
             }
 
         } catch (Exception e) {
 
         }
+
+        Collections.sort(list, new Comparator<RecentItem>() {
+            @Override
+            public int compare(RecentItem c1, RecentItem c2) {
+
+                //compare by name return Collator.getInstance().compare(c1.getName(), c2.getName());
+                return Long.compare(c1.getTimestamp(), c2.getTimestamp());
+            }
+        });
 
         return list;
     }

@@ -10,4 +10,5 @@
     <string name="total_deaths_title">Total Deaths</string>
     <string name="new_deaths_title">New Deaths</string>
     <string name="total_recovered_title">Total Recovered</string>
+    <string name="piechart_title">World</string>
 </resources>

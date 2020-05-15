@@ -5,9 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_marginLeft="12dp"
-    android:layout_marginRight="12dp">
+    android:layout_marginRight="12dp"
+    android:orientation="vertical">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeContainer"
@@ -23,8 +23,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="24dp">
+                android:layout_marginTop="24dp"
+                android:orientation="vertical">
 
                 <!-- Update section -->
                 <include
@@ -47,46 +47,49 @@
                         android:orientation="vertical"
                         app:layout_constraintBottom_toTopOf="@id/home_1_2"
                         app:layout_constraintTop_toTopOf="parent">
+
                         <TextView
+                            android:id="@+id/fragment_home_lastupdated"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Last updated: May 12 2020, 3:36:21 PM"
                             android:fontFamily="@font/opensans_bolditalic"
-                            android:textSize="10dp"
-                            android:textColor="#1b1b2f"
                             android:gravity="right"
                             android:paddingBottom="12dp"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/total_cases_title"
-                            android:fontFamily="@font/opensans_bold"
-                            android:textSize="16dp"
-                            />
+                            android:text="Last updated: May 12 2020, 3:36:21 PM"
+                            android:textColor="#1b1b2f"
+                            android:textSize="10dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_bold"
+                            android:text="@string/total_cases_title"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:id="@+id/fragment_home_stat_totalcases"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_bold"
                             android:text="4,289,084"
                             android:textColor="#1b1b2f"
-                            android:fontFamily="@font/opensans_bold"
-                            android:textSize="40dp"/>
+                            android:textSize="40dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_bold"
+                            android:paddingBottom="4dp"
                             android:text="@string/new_cases_title"
-                            android:fontFamily="@font/opensans_bold"
-                            android:textSize="16dp"
-                            android:paddingBottom="4dp"/>
+                            android:textSize="16dp" />
 
                         <TextView
+                            android:id="@+id/fragment_home_stat_newcases"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
                             android:text="120,023"
                             android:textColor="#162447"
-                            android:fontFamily="@font/opensans_semibold"
                             android:textSize="20dp" />
                     </LinearLayout>
 
@@ -104,35 +107,37 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/total_deaths_title"
                             android:fontFamily="@font/opensans_bold"
-                            android:textSize="16dp"
-                            android:paddingBottom="4dp"/>
+                            android:paddingBottom="4dp"
+                            android:text="@string/total_deaths_title"
+                            android:textSize="16dp" />
 
                         <TextView
+                            android:id="@+id/fragment_home_stat_totaldeaths"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
                             android:text="288,346"
                             android:textColor="#ff5200"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:textSize="28dp"/>
+                            android:textSize="28dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/new_deaths_title"
                             android:fontFamily="@font/opensans_bold"
-                            android:textSize="16dp"
                             android:paddingTop="4dp"
-                            android:paddingBottom="4dp"/>
+                            android:paddingBottom="4dp"
+                            android:text="@string/new_deaths_title"
+                            android:textSize="16dp" />
 
                         <TextView
+                            android:id="@+id/fragment_home_stat_newdeaths"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
                             android:text="12,0221"
                             android:textColor="#162447"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:textSize="20dp"/>
+                            android:textSize="20dp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -149,25 +154,26 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/total_recovered_title"
                             android:fontFamily="@font/opensans_bold"
-                            android:textSize="16dp"
-                            android:paddingBottom="4dp"/>
+                            android:paddingBottom="4dp"
+                            android:text="@string/total_recovered_title"
+                            android:textSize="16dp" />
 
                         <TextView
+                            android:id="@+id/fragment_home_stat_totalrecovered"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/opensans_semibold"
                             android:text="1,544,915"
                             android:textColor="#21bf73"
-                            android:fontFamily="@font/opensans_semibold"
-                            android:textSize="28dp"/>
+                            android:textSize="28dp" />
                     </LinearLayout>
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <LinearLayout
-                    android:id="@+id/home_2"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/fragment_home_totalcases"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -175,40 +181,79 @@
                     android:paddingBottom="6dp">
 
                     <TextView
+                        android:id="@+id/fragment_home_totalcases_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Total Cases by Continents"
                         android:fontFamily="@font/opensans_extrabold"
-                        android:textSize="16dp"/>
+                        android:text="Total Cases by Continents"
+                        android:textSize="16dp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <com.github.mikephil.charting.charts.PieChart
-                        android:id="@+id/chart1"
+                        android:id="@+id/fragment_home_totalcases_chart"
                         android:layout_width="250dp"
-                        android:layout_height="250dp" />
+                        android:layout_height="250dp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@+id/fragment_home_totalcases_recyclerview"
+                        app:layout_constraintTop_toBottomOf="@id/fragment_home_totalcases_title" />
 
-                </LinearLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/fragment_home_totalcases_recyclerview"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="12dp"
+                        app:layout_constraintLeft_toRightOf="@id/fragment_home_totalcases_chart"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/fragment_home_totalcases_title">
 
-                <LinearLayout
-                    android:id="@+id/home_3"
+                    </androidx.recyclerview.widget.RecyclerView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/fragment_home_totaldeaths"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingTop="6dp"
+                    android:paddingTop="12dp"
                     android:paddingBottom="6dp">
 
                     <TextView
+                        android:id="@+id/fragment_home_totaldeaths_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Total Deaths by Continents"
                         android:fontFamily="@font/opensans_extrabold"
-                        android:textSize="16dp"/>
+                        android:text="Total Deaths by Continents"
+                        android:textSize="16dp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <com.github.mikephil.charting.charts.PieChart
-                        android:id="@+id/chart2"
+                        android:id="@+id/fragment_home_totaldeaths_chart"
                         android:layout_width="250dp"
-                        android:layout_height="250dp" />
+                        android:layout_height="250dp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@+id/fragment_home_totaldeaths_recyclerview"
+                        app:layout_constraintTop_toBottomOf="@id/fragment_home_totaldeaths_title" />
 
-                </LinearLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/fragment_home_totaldeaths_recyclerview"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="12dp"
+                        app:layout_constraintLeft_toRightOf="@id/fragment_home_totaldeaths_chart"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/fragment_home_totaldeaths_title">
+
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
                     android:id="@+id/home_4"
@@ -221,12 +266,12 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Recent Cases in Week"
                         android:fontFamily="@font/opensans_extrabold"
-                        android:textSize="16dp"/>
+                        android:text="Recent Cases in Week"
+                        android:textSize="16dp" />
 
                     <com.github.mikephil.charting.charts.BarChart
-                        android:id="@+id/chart3"
+                        android:id="@+id/fragment_home_recentcases_chart"
                         android:layout_width="match_parent"
                         android:layout_height="300dp" />
 
@@ -243,15 +288,16 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Recent Deaths in Week"
                         android:fontFamily="@font/opensans_extrabold"
-                        android:textSize="16dp"/>
+                        android:text="Recent Deaths in Week"
+                        android:textSize="16dp" />
 
                     <com.github.mikephil.charting.charts.BarChart
-                        android:id="@+id/chart4"
+                        android:id="@+id/fragment_home_recentdeaths_chart"
                         android:layout_width="match_parent"
                         android:layout_height="300dp" />
                 </LinearLayout>
+
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
