@@ -10,77 +10,6 @@
     android:padding="16dp"
 
     >
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Filter by"
-        android:fontFamily="@font/opensans_extrabold"
-        android:textSize="16dp"
-        android:paddingBottom="8dp"
-        />
-
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="8dp">
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="North America"
-            android:fontFamily="@font/opensans_bold"
-            android:textSize="12dp"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            />
-        <RadioButton
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="South America"
-            android:fontFamily="@font/opensans_bold"
-            android:textSize="12dp"/>
-        <RadioButton
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Asia"
-            android:fontFamily="@font/opensans_bold"
-            android:textSize="12dp"/>
-        <RadioButton
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Africa"
-            android:fontFamily="@font/opensans_bold"
-            android:textSize="12dp"/>
-        <RadioButton
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Europe"
-            android:fontFamily="@font/opensans_bold"
-            android:textSize="12dp"/>
-        <RadioButton
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Other"
-            android:fontFamily="@font/opensans_bold"
-            android:textSize="12dp"/>
-        <RadioButton
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Oceania"
-            android:fontFamily="@font/opensans_bold"
-            android:textSize="12dp"/>
-    </RadioGroup>
 
     <TextView
         android:layout_width="match_parent"
@@ -92,32 +21,10 @@
         android:paddingBottom="8dp"
         />
     <RadioGroup
+        android:id="@+id/fragment_country_radio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="8dp">
-        <RadioButton
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Total Cases"
-            android:fontFamily="@font/opensans_bold"
-            android:textSize="12dp"/>
-        <RadioButton
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="New Cases"
-            android:fontFamily="@font/opensans_bold"
-            android:textSize="12dp"/>
-        <RadioButton
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Total Deaths"
-            android:fontFamily="@font/opensans_bold"
-            android:textSize="12dp"/>
+
     </RadioGroup>
 </LinearLayout>

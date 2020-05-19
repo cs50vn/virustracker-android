@@ -57,6 +57,13 @@ public class AppUtils {
         return String.format("%.2f", (float)con.getValue() *100 /total) + "%";
     }
 
+    public static String formatNumber(long num) {
+        NumberFormat formatter = NumberFormat.getInstance();
+        formatter.setGroupingUsed(true);
+
+        return formatter.format(num);
+    }
+
     public static Version parseVersionFromJSON(String data) {
         Version version = null;
 

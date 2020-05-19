@@ -11,4 +11,9 @@
     <string name="new_deaths_title">New Deaths</string>
     <string name="total_recovered_title">Total Recovered</string>
     <string name="piechart_title">World</string>
+    <string name="filter_title">Filters</string>
+    <string name="cancel_title">Cancel</string>
+    <string name="totalcases_sort_title">Total cases</string>
+    <string name="newcases_sort_title">New cases</string>
+    <string name="totaldeaths_sort_title">Total deaths</string>
 </resources>

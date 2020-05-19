@@ -140,6 +140,7 @@ public class AppLoaderWorker extends AsyncTask<Context, Void, Void> {
                     AppRepository.getInstance().getHomeRepository().setInternalAppItem(appItem);
                     AppRepository.getInstance().getCountryRepository().setContinentList(continentList);
                     AppRepository.getInstance().getCountryRepository().setInternalCountryList(countryList);
+                    AppRepository.getInstance().getCountryRepository().setInternalSearchCountryList(countryList);
 
                     PLog.WriteLog(PLog.MAIN_TAG, continentList.size());
                     PLog.WriteLog(PLog.MAIN_TAG, countryList.size());

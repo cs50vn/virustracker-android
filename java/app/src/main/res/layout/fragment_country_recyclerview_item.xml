@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
+
+    <TextView
+        android:id="@+id/component_country_id"
+        android:layout_width="0dp"
+        android:layout_weight="0.05"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_bold"
+        android:gravity="center"
+        android:text="4 "
+        android:textSize="12dp" />
+
+    <ImageView
+        android:id="@+id/component_country_flag"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/it" />
+
+    <TextView
+        android:id="@+id/component_country_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.3"
+        android:ellipsize="end"
+        android:fontFamily="@font/opensans_bold"
+        android:singleLine="true"
+        android:text="Bosnia"
+        android:textSize="12dp" />
+
+    <TextView
+        android:id="@+id/component_country_cases"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.15"
+        android:fontFamily="@font/opensans_extrabold"
+        android:gravity="right"
+        android:text="1,219,814"
+        android:textColor="#1b1b2f"
+        android:textSize="12dp"
+        />
+
+    <TextView
+        android:id="@+id/component_country_new"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.11"
+        android:fontFamily="@font/opensans_semibold"
+        android:gravity="right"
+        android:text="+30,000"
+        android:textColor="#162447"
+        android:textSize="12dp" />
+    <TextView
+        android:id="@+id/component_country_deaths"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.11"
+        android:fontFamily="@font/opensans_semibold"
+        android:gravity="right"
+        android:text="30,739"
+        android:textColor="#ff5200"
+        android:textSize="12dp" />
+</LinearLayout>

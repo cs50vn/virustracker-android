@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.cs50vn.virustracker.app.controller.AssetManager;
 import com.cs50vn.virustracker.app.controller.BitmapManager;
 import com.cs50vn.virustracker.app.tracking.PLog;
+import com.cs50vn.virustracker.app.utils.CountrySortEnum;
 
 import java.time.Duration;
 import java.util.List;
@@ -61,6 +62,7 @@ public class AppRepository {
         bitmapManager = BitmapManager.getInstance();
 
         setSplashScreenMode(true);
+        countryRepository.setCountrySortEnum(CountrySortEnum.TOTAL_CASES);
     }
 
     public Context getContext() {

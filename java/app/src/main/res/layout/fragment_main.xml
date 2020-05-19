@@ -9,7 +9,7 @@
     tools:context=".MainAct"
     android:orientation="vertical"
 
-
+    android:background="#fff"
     >
     
     <LinearLayout

@@ -2,14 +2,11 @@ package com.cs50vn.virustracker.app.utils;
 
 import com.cs50vn.virustracker.app.model.online.RecentItem;
 import com.cs50vn.virustracker.app.tracking.PLog;
-import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.formatter.ValueFormatter;
-import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.Locale;
 
@@ -34,11 +31,6 @@ public class MyDayAxisFormatter extends ValueFormatter {
 
         PLog.WriteLog(PLog.MAIN_TAG, date);
         return date;
-    }
-
-    @Override
-    public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
-        return super.getFormattedValue(value, entry, dataSetIndex, viewPortHandler);
     }
 
 }
