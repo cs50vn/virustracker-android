@@ -145,7 +145,7 @@ public class CountryFragment extends Fragment {
         countryViewModel.getSearchCountryList().observe(this, countries -> {
             PLog.WriteLog(PLog.MAIN_TAG, "getSearchCountryList founded: " + countries.size());
             LinearLayoutManager layout = new LinearLayoutManager(this.getContext());
-            CountryAdapter adapter = new CountryAdapter(this.getContext(), countries);
+            CountryAdapter adapter = new CountryAdapter(this, countries);
             rv.setLayoutManager(layout);
             rv.setAdapter(adapter);
 

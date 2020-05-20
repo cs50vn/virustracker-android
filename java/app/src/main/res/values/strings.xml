@@ -16,4 +16,7 @@
     <string name="totalcases_sort_title">Total cases</string>
     <string name="newcases_sort_title">New cases</string>
     <string name="totaldeaths_sort_title">Total deaths</string>
+    <string name="network_error">No connection.\n Please check your network.</string>
+    <string name="network_retry">Retry</string>
+    <string name="exit_app">Press back again to exit app.</string>
 </resources>

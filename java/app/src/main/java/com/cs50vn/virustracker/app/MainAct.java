@@ -33,6 +33,10 @@ public class MainAct extends AppCompatActivity {
                 startApp();
 
         });
+
+        appViewModel.exitApp().observe(this, o -> {
+            System.exit(0);
+        });
     }
 
     private void startApp() {
@@ -85,7 +89,6 @@ public class MainAct extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         PLog.WriteLog(PLog.MAIN_TAG, "MainAct.onDestroy");
-        appViewModel.destroyApp();
         super.onDestroy();
     }
 

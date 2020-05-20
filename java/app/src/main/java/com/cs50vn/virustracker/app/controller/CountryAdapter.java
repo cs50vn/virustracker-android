@@ -10,13 +10,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cs50vn.virustracker.app.R;
+import com.cs50vn.virustracker.app.appmodel.AppViewModel;
+import com.cs50vn.virustracker.app.appmodel.CountryViewModel;
 import com.cs50vn.virustracker.app.model.online.Continent;
 import com.cs50vn.virustracker.app.model.online.Country;
 import com.cs50vn.virustracker.app.tracking.PLog;
 import com.cs50vn.virustracker.app.utils.AppUtils;
+import com.cs50vn.virustracker.app.views.MainFragment;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -44,12 +49,15 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
         }
     }
 
-    private Context ctx;
+    private AppViewModel appViewModel;
+    private Fragment ctx;
     private LinkedList<Country> list;
 
-    public CountryAdapter(Context ctx, LinkedList<Country> list) {
+    public CountryAdapter(Fragment ctx, LinkedList<Country> list) {
         this.ctx = ctx;
         this.list = list;
+
+        appViewModel = ViewModelProviders.of(ctx).get(AppViewModel.class);
     }
 
     @NonNull
@@ -60,8 +68,10 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PLog.WriteLog(PLog.MAIN_TAG, "country clicked");
+                PLog.WriteLog(PLog.MAIN_TAG, "(Country)v.getTag(): " + ((Country)v.getTag()).getId());
                 //Go to country detail
+                appViewModel.goToCountryDetail((Country)v.getTag());
+
             }
         });
 
@@ -90,6 +100,8 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
 
             TextView tv4 = holder.tv4;
             tv4.setText(AppUtils.formatNumber(item.getItemList().get(0).getTotalDeaths()));
+
+            holder.itemView.setTag(item);
         }
     }
 

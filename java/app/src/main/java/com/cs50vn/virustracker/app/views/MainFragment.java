@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,7 +44,7 @@ public class MainFragment extends Fragment {
                     switchFragment(countryFragment);
                     return true;
                 case R.id.navigation_about:
-                    switchFragment(countryDetailFragment);
+                    switchFragment(aboutFragment);
                     return true;
             }
             return false;
@@ -79,6 +80,7 @@ public class MainFragment extends Fragment {
 
     }
 
+
     private void switchFragment(Fragment fragment) {
         FragmentTransaction trans = getChildFragmentManager().beginTransaction();
         String className = fragment.getClass().getSimpleName();
@@ -91,15 +93,25 @@ public class MainFragment extends Fragment {
             trans.show(homeFragment);
             trans.hide(countryFragment);
             trans.hide(countryDetailFragment);
+            trans.hide(aboutFragment);
         } else if (className.equals("CountryFragment")) {
             trans.hide(homeFragment);
             trans.show(countryFragment);
             trans.hide(countryDetailFragment);
+            trans.hide(aboutFragment);
         } if (className.equals("CountryDetailFragment")) {
             trans.hide(homeFragment);
             trans.hide(countryFragment);
             trans.show(countryDetailFragment);
+            trans.hide(aboutFragment);
+        } else if (className.equals("AboutFragment")) {
+            trans.hide(homeFragment);
+            trans.hide(countryFragment);
+            trans.hide(countryDetailFragment);
+            trans.show(aboutFragment);
         }
+
+        appViewModel.setCurrentFragment(className);
 
         trans.commit();
     }
@@ -113,11 +125,26 @@ public class MainFragment extends Fragment {
         appViewModel = ViewModelProviders.of(this.getActivity()).get(AppViewModel.class);
         BottomNavigationView navigation = view.findViewById(R.id.app_navigation);
 
-        appViewModel.isHideNavigationMode().observe(this, status -> {
-            if (status)
+        appViewModel.isCountryDetailMode().observe(this, status -> {
+            if (status) {
                 navigation.setVisibility(View.GONE);
-            else
+                switchFragment(countryDetailFragment);
+            } else {
                 navigation.setVisibility(View.VISIBLE);
+                switchFragment(countryFragment);
+            }
+
+        });
+
+        appViewModel.onPressBack().observe(this, fragment -> {
+            if (fragment.equals("CountryDetailFragment")) {
+                switchFragment(countryFragment);
+            }
+        });
+
+        appViewModel.showNotification().observe(this, obj -> {
+            PLog.WriteLog(PLog.MAIN_TAG, "show notif");
+            Toast.makeText(this.getContext(), R.string.exit_app, Toast.LENGTH_SHORT).show();
         });
 
         return view;
@@ -136,6 +163,7 @@ public class MainFragment extends Fragment {
         trans.add(R.id.app_content, homeFragment);
         trans.add(R.id.app_content, countryFragment);
         trans.add(R.id.app_content, countryDetailFragment);
+        trans.add(R.id.app_content, aboutFragment);
         trans.commit();
 
         //Init app fragment

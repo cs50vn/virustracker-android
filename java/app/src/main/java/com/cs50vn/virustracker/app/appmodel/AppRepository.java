@@ -5,11 +5,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.cs50vn.virustracker.app.controller.AssetManager;
 import com.cs50vn.virustracker.app.controller.BitmapManager;
+import com.cs50vn.virustracker.app.model.online.Country;
 import com.cs50vn.virustracker.app.tracking.PLog;
 import com.cs50vn.virustracker.app.utils.CountrySortEnum;
 
-import java.time.Duration;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -23,7 +22,10 @@ public class AppRepository {
         noDataMode = new MutableLiveData<>();
         noDataRetryMode = new MutableLiveData<>();
         splashScreenMode = new MutableLiveData<>();
-        hideNavigationMode = new MutableLiveData<>();
+        countryDetailMode = new MutableLiveData<>();
+        currentFragment = new MutableLiveData<>();
+        showNotification = new MutableLiveData<>();
+        exitApp = new MutableLiveData<>();
     }
 
     public static AppRepository getInstance() {
@@ -43,11 +45,16 @@ public class AppRepository {
     private boolean internalNoDataRetryMode = false;
     private MutableLiveData<Boolean> splashScreenMode;
     private boolean internalSplashScreenMode = true;
-    private MutableLiveData<Boolean> hideNavigationMode;
-    private boolean internalHideNavigationMode = true;
+    private MutableLiveData<Boolean> countryDetailMode;
+    private boolean internalCountryDetailMode = true;
+    private MutableLiveData<String> currentFragment;
+    private String internalCurrentFragment = "HomeFragment";
+    private MutableLiveData<Object> showNotification;
+    private MutableLiveData<Object> exitApp;
 
     private Context ctx;
 
+    private int exitCount = 2;
     private HomeRepository homeRepository;
     private CountryRepository countryRepository;
     private AppDAO appDAO;
@@ -128,22 +135,61 @@ public class AppRepository {
         splashScreenMode.postValue(internalSplashScreenMode);
     }
 
-    public LiveData<Boolean> isHideNavigationMode() {
-        return hideNavigationMode;
+    public LiveData<Boolean> isCountryDetailMode() {
+        return countryDetailMode;
     }
 
-    public void setHideNavigationMode(boolean status) {
-        this.internalHideNavigationMode = status;
+    public void setCountryDetailMode(boolean status) {
+        this.internalCountryDetailMode = status;
 
-        hideNavigationMode.postValue(internalHideNavigationMode);
+        countryDetailMode.postValue(internalCountryDetailMode);
     }
 
     public void destroy() {
         appDAO.close();
     }
 
-    public void pressBack() {
+
+    public void goToCountryDetail(Country country) {
+        setCountryDetailMode(true);
     }
+
+
+    public void pressBack() {
+        if (internalCurrentFragment.equals("HomeFragment") ||
+                internalCurrentFragment.equals("CountryFragment") ||
+                internalCurrentFragment.equals("AboutFragment")) {
+            exitCount--;
+            if (exitCount == 0) {
+                exitApp.postValue(null);
+            } else {
+                destroy();
+                showNotification.postValue(null);
+            }
+
+        } else if (internalCurrentFragment.equals("CountryDetailFragment")) {
+            setCountryDetailMode(false);
+        }
+    }
+
+    public void setCurrentFragment(String className) {
+        internalCurrentFragment = className;
+        exitCount = 2;
+    }
+
+    public LiveData<String> onPressBack() {
+        return currentFragment;
+    }
+
+    public LiveData<Object> showNotification() {
+        return showNotification;
+    }
+
+    public LiveData<Object> exitApp() {
+        return exitApp;
+    }
+
+
 
     /////////////////////////////////////////////////////////////////////////////////
     //App repository
@@ -155,6 +201,8 @@ public class AppRepository {
     public CountryRepository getCountryRepository() {
         return countryRepository;
     }
+
+
 
     /////////////////////////////////////////////////////////////////////////////////
 }
