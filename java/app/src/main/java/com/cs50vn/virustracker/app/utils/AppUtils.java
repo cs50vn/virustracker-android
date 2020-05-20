@@ -64,6 +64,53 @@ public class AppUtils {
         return formatter.format(num);
     }
 
+    public static Country parseCountryDetail(String data) {
+        Country country = null;
+
+        try {
+            JSONObject obj = new JSONObject(data);
+            String id = obj.getString("id");
+            String name = obj.getString("name");
+            String capitalName = obj.getString("capitalName");
+            int area = obj.getInt("area");
+            long population = obj.getLong("population");
+            ImageRes res = new ImageRes(obj.getString("flagId"), obj.getString("flagUrl"), obj.getString("flagData"), null, obj.getLong("flagTimestamp"));
+            long timestamp = obj.getLong("timestamp");
+            String continentId = obj.getString("continentId");
+            LinkedList<Item> items = new LinkedList<>();
+            LinkedList<RecentItem> recentCases = parseRecentItemFromJSON(obj.getJSONObject("status").getString("totalCasesChart"));
+            LinkedList<RecentItem> recentDeaths = parseRecentItemFromJSON(obj.getJSONObject("status").getString("totalDeathsChart"));
+            HashMap<String, Continent> continents = AppRepository.getInstance().getCountryRepository().getContinentList();
+
+
+            JSONObject obj1 = obj.getJSONObject("status");
+            long totalCases, newCases, totalDeaths, newDeaths, totalRecovered, activeCases, seriousCases, totalTests;
+            float totalCasesPer1Pop, totalDeathsPer1Pop, testsPer1Pop;
+            totalCases = obj1.getInt("totalCases");
+            newCases = obj1.getInt("newCases");
+            totalDeaths = obj1.getInt("totalDeaths");
+            newDeaths = obj1.getInt("newDeaths");
+            totalRecovered = obj1.getInt("totalRecovered");
+            seriousCases = obj1.getInt("seriousCases");
+            totalCasesPer1Pop = (float) obj1.getDouble("totalCasesPer1Pop");
+            totalDeathsPer1Pop = (float) obj1.getDouble("totalDeathsPer1Pop");
+            totalTests = obj1.getInt("totalTests");
+            testsPer1Pop = (float) obj1.getDouble("testsPer1Pop");
+
+            items.add(new Item(0, totalCases, newCases, totalDeaths, newDeaths, totalRecovered, seriousCases, totalCasesPer1Pop, totalDeathsPer1Pop, totalTests, testsPer1Pop, timestamp));
+            country = new Country(id, name, capitalName, area, population, res, timestamp, continents.get(continentId), items, recentCases, recentDeaths);
+
+        } catch (Exception e) {
+            PLog.WriteLog(PLog.MAIN_TAG, "Could not parse country detail !!!");
+            PLog.WriteLog(PLog.MAIN_TAG, e.toString());
+            e.printStackTrace();
+        }
+
+
+
+        return country;
+    }
+
     public static Version parseVersionFromJSON(String data) {
         Version version = null;
 

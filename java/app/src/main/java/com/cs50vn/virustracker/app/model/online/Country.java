@@ -12,6 +12,8 @@ public class Country {
     private long timestamp;
     private Continent continent;
     private LinkedList<Item> itemList;
+    private LinkedList<RecentItem> totalCasesRecent;
+    private LinkedList<RecentItem> totalDeathsRecent;
 
     public Country() {
         this.id = "";
@@ -23,6 +25,20 @@ public class Country {
         this.timestamp = 0;
         this.continent = null;
         this.itemList = new LinkedList<>();
+    }
+
+    public Country(String id, String name, String capitalName, int area, long population, ImageRes flagRes, long timestamp, Continent continent, LinkedList<Item> itemList, LinkedList<RecentItem> totalCasesRecent, LinkedList<RecentItem> totalDeathsRecent) {
+        this.id = id;
+        this.name = name;
+        this.capitalName = capitalName;
+        this.area = area;
+        this.population = population;
+        this.flagRes = flagRes;
+        this.timestamp = timestamp;
+        this.continent = continent;
+        this.itemList = itemList;
+        this.totalCasesRecent = totalCasesRecent;
+        this.totalDeathsRecent = totalDeathsRecent;
     }
 
     public Country(String id, String name, String capitalName, int area, long population, ImageRes flagRes, long timestamp, Continent continent, LinkedList<Item> itemList) {
@@ -107,5 +123,21 @@ public class Country {
 
     public void setItemList(LinkedList<Item> itemList) {
         this.itemList = itemList;
+    }
+
+    public LinkedList<RecentItem> getTotalCasesRecent() {
+        return totalCasesRecent;
+    }
+
+    public void setTotalCasesRecent(LinkedList<RecentItem> totalCasesRecent) {
+        this.totalCasesRecent = totalCasesRecent;
+    }
+
+    public LinkedList<RecentItem> getTotalDeathsRecent() {
+        return totalDeathsRecent;
+    }
+
+    public void setTotalDeathsRecent(LinkedList<RecentItem> totalDeathsRecent) {
+        this.totalDeathsRecent = totalDeathsRecent;
     }
 }

@@ -46,21 +46,21 @@ public class CountryRepository {
         internalCountrySort = CountrySortEnum.TOTAL_CASES;
     }
 
-    public void sortCountryList(CountrySortEnum type) {
+    public void sortCountryList(LinkedList<Country> list, CountrySortEnum type) {
         PLog.WriteLog(PLog.MAIN_TAG, "sort =======0 ");
         if (type == CountrySortEnum.TOTAL_CASES) {
             PLog.WriteLog(PLog.MAIN_TAG, "sort =======1 ");
-            Collections.sort(internalSearchCountryList, (o1, o2) -> {
+            Collections.sort(list, (o1, o2) -> {
                 return Long.compare(o2.getItemList().get(0).getTotalCases(), o1.getItemList().get(0).getTotalCases());
             });
         } else if (type == CountrySortEnum.NEW_CASES) {
             PLog.WriteLog(PLog.MAIN_TAG, "sort =======2 ");
-            Collections.sort(internalSearchCountryList, (o1, o2) -> {
+            Collections.sort(list, (o1, o2) -> {
                 return Long.compare(o2.getItemList().get(0).getNewCases(), o1.getItemList().get(0).getNewCases());
             });
         } else if (type == CountrySortEnum.TOTAL_DEATHS) {
             PLog.WriteLog(PLog.MAIN_TAG, "sort =======3 ");
-            Collections.sort(internalSearchCountryList, (o1, o2) -> {
+            Collections.sort(list, (o1, o2) -> {
                 return Long.compare(o2.getItemList().get(0).getTotalDeaths(), o1.getItemList().get(0).getTotalDeaths());
             });
         }
@@ -83,7 +83,7 @@ public class CountryRepository {
     public void setInternalSearchCountryList(LinkedList<Country> list) {
         internalSearchCountryList.clear();
         internalSearchCountryList.addAll(list);
-        sortCountryList(internalCountrySort);
+        sortCountryList(internalSearchCountryList, internalCountrySort);
         searchCountryList.postValue(internalSearchCountryList);
     }
 
@@ -121,8 +121,19 @@ public class CountryRepository {
 
     public void setCountrySortEnum(CountrySortEnum type) {
         internalCountrySort = type;
-        sortCountryList(type);
+        sortCountryList(internalSearchCountryList, type);
         searchCountryList.postValue(internalSearchCountryList);
         countrySort.postValue(internalCountrySort);
+    }
+
+    public void search(String keyword) {
+        LinkedList<Country> list = new LinkedList<>();
+
+        for (Country country: internalCountryList) {
+            if (country.getName().toLowerCase().contains(keyword.toLowerCase()))
+                list.add(country);
+        }
+
+        setInternalSearchCountryList(list);
     }
 }

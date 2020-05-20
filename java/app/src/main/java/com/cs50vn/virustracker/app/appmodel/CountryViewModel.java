@@ -45,6 +45,10 @@ public class CountryViewModel extends AndroidViewModel {
     }
 
     public void search(String keyword) {
+        appRepository.getCountryRepository().search(keyword);
+    }
 
+    public LiveData<Country> getCountryDetail() {
+        return appRepository.getCountryRepository().getCountryDetail();
     }
 }

@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.cs50vn.virustracker.app.controller.worker.AppLoaderWorker;
+import com.cs50vn.virustracker.app.controller.worker.CountryDetailLoaderWorker;
 import com.cs50vn.virustracker.app.model.online.Country;
 
 public class AppViewModel extends AndroidViewModel {
@@ -52,7 +53,7 @@ public class AppViewModel extends AndroidViewModel {
     }
 
     public void goToCountryDetail(Country country) {
-        appRepository.goToCountryDetail(country);
+        new CountryDetailLoaderWorker().execute(country);
     }
 
     public LiveData<String> onPressBack() {

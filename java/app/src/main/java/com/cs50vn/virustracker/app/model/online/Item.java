@@ -1,5 +1,7 @@
 package com.cs50vn.virustracker.app.model.online;
 
+import java.util.LinkedList;
+
 public class Item {
     private long id;
     private long totalCases;

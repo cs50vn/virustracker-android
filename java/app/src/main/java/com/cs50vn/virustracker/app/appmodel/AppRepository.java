@@ -146,7 +146,7 @@ public class AppRepository {
     }
 
     public void destroy() {
-        appDAO.close();
+        
     }
 
 

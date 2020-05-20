@@ -112,7 +112,7 @@ public class HomeFragment extends Fragment {
 
         TextView tv = parent.findViewById(R.id.fragment_home_stat_totalcases);
         ValueAnimator valueAnimator = ValueAnimator.ofInt(0, (int) appItem.getTotalCases());
-        valueAnimator.setDuration(2000);
+        valueAnimator.setDuration(1500);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator ani) {
