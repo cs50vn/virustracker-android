@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.cs50vn.virustracker.app.R;
 import com.cs50vn.virustracker.app.appmodel.AppViewModel;
@@ -69,6 +71,44 @@ public class CountryDetailFragment extends Fragment {
         parent = inflater.inflate(R.layout.fragment_country_detail, container, false);
         countryViewModel = ViewModelProviders.of(this.getActivity()).get(CountryViewModel.class);
         appViewModel = ViewModelProviders.of(this.getActivity()).get(AppViewModel.class);
+
+        ////////////////////////////////////////////////////////////////////////////
+        //Handle network issue
+        SwipeRefreshLayout content = parent.findViewById(R.id.country_detail_swipe_content);
+        View homeLoading = parent.findViewById(R.id.country_detail_loading);
+        View homeNodata = parent.findViewById(R.id.country_detail_network_error);
+
+        countryViewModel.isNoDataMode().observe(this, status -> {
+            if (status) {
+                content.setVisibility(View.GONE);
+                homeNodata.setVisibility(View.VISIBLE);
+            } else {
+                content.setVisibility(View.VISIBLE);
+                homeNodata.setVisibility(View.GONE);
+            }
+
+        });
+
+        countryViewModel.isNoDataRetryMode().observe(this, status -> {
+            if (status) {
+                homeLoading.setVisibility(View.VISIBLE);
+                homeNodata.setVisibility(View.GONE);
+            } else {
+                homeLoading.setVisibility(View.GONE);
+                homeNodata.setVisibility(View.VISIBLE);
+            }
+        });
+
+        Button bt = parent.findViewById(R.id.country_detail_network_error).findViewById(R.id.reloadButton);
+        bt.setOnClickListener(v -> {
+            countryViewModel.reloadData(0);
+        });
+
+        content.setOnRefreshListener(() -> {
+            countryViewModel.reloadData(1);
+        });
+
+        ////////////////////////////////////////////////////////////////////////////
 
         countryViewModel.getCountryDetail().observe(this, country -> {
             buildCountryDetail(country);

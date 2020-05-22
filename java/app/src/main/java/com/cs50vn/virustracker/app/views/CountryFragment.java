@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.cs50vn.virustracker.app.R;
+import com.cs50vn.virustracker.app.appmodel.AppViewModel;
 import com.cs50vn.virustracker.app.appmodel.CountryViewModel;
 import com.cs50vn.virustracker.app.controller.CountryAdapter;
 import com.cs50vn.virustracker.app.tracking.PLog;
@@ -31,8 +33,9 @@ import com.cs50vn.virustracker.app.utils.CountryModeEnum;
  */
 public class CountryFragment extends Fragment {
 
-    CountryViewModel countryViewModel;
-    View parent;
+    private AppViewModel appViewModel;
+    private CountryViewModel countryViewModel;
+    private View parent;
 
     public CountryFragment() {
         // Required empty public constructor
@@ -42,9 +45,50 @@ public class CountryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         countryViewModel = ViewModelProviders.of(this).get(CountryViewModel.class);
+        appViewModel = ViewModelProviders.of(this.getActivity()).get(AppViewModel.class);
 
         // Inflate the layout for this fragment
         parent = inflater.inflate(R.layout.fragment_country, container, false);
+
+        ////////////////////////////////////////////////////////////////////////////
+        //Handle network issue
+        SwipeRefreshLayout content = parent.findViewById(R.id.country_swipe_content);
+        View homeLoading = parent.findViewById(R.id.country_loading);
+        View homeNodata = parent.findViewById(R.id.country_network_error);
+
+        appViewModel.isNoDataMode().observe(this, status -> {
+            content.setRefreshing(false);
+            if (status) {
+                content.setVisibility(View.GONE);
+                homeNodata.setVisibility(View.VISIBLE);
+            } else {
+                content.setVisibility(View.VISIBLE);
+                homeNodata.setVisibility(View.GONE);
+            }
+
+        });
+
+        appViewModel.isNoDataRetryMode().observe(this, status -> {
+            content.setRefreshing(false);
+            if (status) {
+                homeLoading.setVisibility(View.VISIBLE);
+                homeNodata.setVisibility(View.GONE);
+            } else {
+                homeLoading.setVisibility(View.GONE);
+                homeNodata.setVisibility(View.VISIBLE);
+            }
+        });
+
+        Button bt = parent.findViewById(R.id.country_network_error).findViewById(R.id.reloadButton);
+        bt.setOnClickListener(v -> {
+            appViewModel.reloadData(0);
+        });
+
+        content.setOnRefreshListener(() -> {
+            appViewModel.reloadData(1);
+        });
+
+        ////////////////////////////////////////////////////////////////////////////
 
         EditText input = parent.findViewById(R.id.fragment_country_edittext);
         input.addTextChangedListener(new TextWatcher() {

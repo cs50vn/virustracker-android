@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.core.content.res.ResourcesCompat;
@@ -15,8 +16,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.cs50vn.virustracker.app.R;
+import com.cs50vn.virustracker.app.appmodel.AppViewModel;
 import com.cs50vn.virustracker.app.appmodel.HomeViewModel;
 import com.cs50vn.virustracker.app.controller.TotalCasesAdapter;
 import com.cs50vn.virustracker.app.model.online.AppItem;
@@ -62,6 +65,7 @@ import java.util.TimeZone;
  */
 public class HomeFragment extends Fragment {
 
+    private AppViewModel appViewModel;
     private HomeViewModel homeViewModel;
     private View parent;
     private AppItem appItem;
@@ -82,6 +86,49 @@ public class HomeFragment extends Fragment {
         parent = inflater.inflate(R.layout.fragment_home, container, false);
 
         homeViewModel = ViewModelProviders.of(this.getActivity()).get(HomeViewModel.class);
+        appViewModel = ViewModelProviders.of(this.getActivity()).get(AppViewModel.class);
+
+        ////////////////////////////////////////////////////////////////////////////
+        //Handle network issue
+        SwipeRefreshLayout content = parent.findViewById(R.id.home_swipe_content);
+        View homeLoading = parent.findViewById(R.id.home_loading);
+        View homeNodata = parent.findViewById(R.id.home_network_error);
+
+        appViewModel.isNoDataMode().observe(this, status -> {
+            content.setRefreshing(false);
+            if (status) {
+                content.setVisibility(View.GONE);
+                homeNodata.setVisibility(View.VISIBLE);
+            } else {
+                content.setVisibility(View.VISIBLE);
+                homeNodata.setVisibility(View.GONE);
+            }
+
+        });
+
+        appViewModel.isNoDataRetryMode().observe(this, status -> {
+            content.setRefreshing(false);
+            if (status) {
+                homeLoading.setVisibility(View.VISIBLE);
+                homeNodata.setVisibility(View.GONE);
+            } else {
+                homeLoading.setVisibility(View.GONE);
+                homeNodata.setVisibility(View.VISIBLE);
+            }
+        });
+
+
+        Button bt = parent.findViewById(R.id.home_network_error).findViewById(R.id.reloadButton);
+        bt.setOnClickListener(v -> {
+            appViewModel.reloadData(0);
+        });
+
+        content.setOnRefreshListener(() -> {
+
+            appViewModel.reloadData(1);
+        });
+
+        ////////////////////////////////////////////////////////////////////////////
 
         homeViewModel.getTopHome().observe(this, appItem -> {
             PLog.WriteLog(PLog.MAIN_TAG, "ooo: " + appItem.getTotalCases());

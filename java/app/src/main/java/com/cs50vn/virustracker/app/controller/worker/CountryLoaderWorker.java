@@ -9,7 +9,7 @@ public class CountryLoaderWorker extends AsyncTask<Integer, Void, Void> {
 
     @Override
     protected Void doInBackground(Integer... params) {
-        int posTournament = params[0];
+        int type = params[0];
         appRepository = AppRepository.getInstance();
 
         return null;

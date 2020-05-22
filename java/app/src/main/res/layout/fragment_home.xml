@@ -304,6 +304,12 @@
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <include
+        android:id="@+id/home_loading"
+        layout="@layout/component_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+    <include
         android:id="@+id/home_network_error"
         layout="@layout/component_network_error"
         android:layout_width="match_parent"

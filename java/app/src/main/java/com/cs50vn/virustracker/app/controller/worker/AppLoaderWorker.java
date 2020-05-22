@@ -77,7 +77,6 @@ public class AppLoaderWorker extends AsyncTask<Context, Void, Void> {
 
         appRepository.init(ctx);
 
-
         String data = APIRequest.getVersionStatus(AppUtils.getVersionFromAssets(ctx).getVersionId());
         PLog.WriteLog(PLog.MAIN_TAG, data);
 

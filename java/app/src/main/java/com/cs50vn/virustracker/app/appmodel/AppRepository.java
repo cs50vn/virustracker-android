@@ -149,7 +149,6 @@ public class AppRepository {
         
     }
 
-
     public void goToCountryDetail(Country country) {
         setCountryDetailMode(true);
     }
