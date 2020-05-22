@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.core.content.res.ResourcesCompat;
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.cs50vn.virustracker.app.R;
+import com.cs50vn.virustracker.app.appmodel.AppViewModel;
 import com.cs50vn.virustracker.app.appmodel.CountryViewModel;
 import com.cs50vn.virustracker.app.appmodel.HomeViewModel;
 import com.cs50vn.virustracker.app.model.online.AppItem;
@@ -46,10 +48,11 @@ import java.util.Locale;
  */
 public class CountryDetailFragment extends Fragment {
 
-    CountryViewModel countryViewModel;
-    View parent;
-    Typeface tfLight;
-    Country country;
+    private CountryViewModel countryViewModel;
+    private AppViewModel appViewModel;
+    private View parent;
+    private Typeface tfLight;
+    private Country country;
 
     public CountryDetailFragment() {
 
@@ -65,9 +68,15 @@ public class CountryDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         parent = inflater.inflate(R.layout.fragment_country_detail, container, false);
         countryViewModel = ViewModelProviders.of(this.getActivity()).get(CountryViewModel.class);
+        appViewModel = ViewModelProviders.of(this.getActivity()).get(AppViewModel.class);
 
         countryViewModel.getCountryDetail().observe(this, country -> {
             buildCountryDetail(country);
+        });
+
+        ImageView iv = parent.findViewById(R.id.fragment_country_detail_header_icon);
+        iv.setOnClickListener(v -> {
+            appViewModel.pressBack();
         });
 
         tfLight = ResourcesCompat.getFont(getContext(), R.font.opensans_bold);
@@ -131,6 +140,25 @@ public class CountryDetailFragment extends Fragment {
 
         TextView tv9 = parent.findViewById(R.id.fragment_country_detail_header_title);
         tv9.setText(country.getName());
+
+        ////////////////////////////////////////////////////////////
+        TextView tv10 = parent.findViewById(R.id.fragment_country_detail_active_cases);
+        tv10.setText(AppUtils.formatNumber(item.getTotalCases() - item.getTotalDeaths() - item.getTotalRecovered()));
+
+        TextView tv11 = parent.findViewById(R.id.fragment_country_detail_serious_cases);
+        tv11.setText(AppUtils.formatNumber(item.getSeriousCases()));
+
+        TextView tv12 = parent.findViewById(R.id.fragment_country_detail_total_cases_per_1pop);
+        tv12.setText(AppUtils.formatFloating(item.getTotalCasesPer1Pop()));
+
+        TextView tv13 = parent.findViewById(R.id.fragment_country_detail_total_deaths_per_1pop);
+        tv13.setText(AppUtils.formatFloating(item.getTotalDeathsPer1Pop()));
+
+        TextView tv14 = parent.findViewById(R.id.fragment_country_detail_total_tests);
+        tv14.setText(AppUtils.formatNumber(item.getTotalTests()));
+
+        TextView tv15 = parent.findViewById(R.id.fragment_country_detail_tests_per_1pop);
+        tv15.setText(AppUtils.formatFloating(item.getTestsPer1Pop()));
 
     }
 

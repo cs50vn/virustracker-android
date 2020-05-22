@@ -30,6 +30,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.text.Collator;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Calendar;
 import java.util.Collections;
@@ -57,11 +58,23 @@ public class AppUtils {
         return String.format("%.2f", (float)con.getValue() *100 /total) + "%";
     }
 
+    public static String formatNumber(String pattern, long num) {
+        DecimalFormat formatter = new DecimalFormat(pattern);
+
+        return formatter.format(num);
+    }
+
     public static String formatNumber(long num) {
         NumberFormat formatter = NumberFormat.getInstance();
         formatter.setGroupingUsed(true);
 
         return formatter.format(num);
+    }
+
+    public static String formatFloating(double num) {
+        DecimalFormat myFormatter = new DecimalFormat("###,###.##");
+
+        return  myFormatter.format(num);
     }
 
     public static Country parseCountryDetail(String data) {

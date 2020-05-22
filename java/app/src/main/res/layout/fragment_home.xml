@@ -10,7 +10,7 @@
     android:orientation="vertical">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeContainer"
+        android:id="@+id/home_swipe_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -304,15 +304,8 @@
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <include
-        android:id="@+id/home_nodata"
-        layout="@layout/component_nodata"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone" />
-
-    <include
-        android:id="@+id/home_loading"
-        layout="@layout/component_loading"
+        android:id="@+id/home_network_error"
+        layout="@layout/component_network_error"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone" />

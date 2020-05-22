@@ -27,4 +27,7 @@ public class AppConfig {
             ColorTemplate.rgb("7a5195"), ColorTemplate.rgb("bc5090"),
             ColorTemplate.rgb("ffa600")));
 
+    //Number pattern
+    public static String FLOATING_PATTERN = "###,###.##";
+    public static String DECIMAL_PATTERN = "###,###";
 }

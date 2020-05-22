@@ -19,4 +19,11 @@
     <string name="network_error">No connection.\n Please check your network.</string>
     <string name="network_retry">Retry</string>
     <string name="exit_app">Press back again to exit app.</string>
+
+    <string name="active_cases">Active cases</string>
+    <string name="serious_cases">Serious cases</string>
+    <string name="total_cases_per_1pop">Total cases per 1M</string>
+    <string name="total_deaths_per_1pop">Total deaths per 1M</string>
+    <string name="total_tests">Total tests</string>
+    <string name="tests_per_1pop">Tests per 1M</string>
 </resources>

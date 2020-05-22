@@ -62,9 +62,9 @@ import java.util.TimeZone;
  */
 public class HomeFragment extends Fragment {
 
-    HomeViewModel homeViewModel;
-    View parent;
-    AppItem appItem;
+    private HomeViewModel homeViewModel;
+    private View parent;
+    private AppItem appItem;
 
     public HomeFragment() {
 
