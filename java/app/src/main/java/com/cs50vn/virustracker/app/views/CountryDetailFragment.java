@@ -19,6 +19,7 @@ import com.cs50vn.virustracker.app.R;
 import com.cs50vn.virustracker.app.appmodel.AppViewModel;
 import com.cs50vn.virustracker.app.appmodel.CountryViewModel;
 import com.cs50vn.virustracker.app.appmodel.HomeViewModel;
+import com.cs50vn.virustracker.app.controller.worker.BitmapWorker;
 import com.cs50vn.virustracker.app.model.online.AppItem;
 import com.cs50vn.virustracker.app.model.online.Country;
 import com.cs50vn.virustracker.app.model.online.Item;
@@ -62,7 +63,7 @@ public class CountryDetailFragment extends Fragment {
 
     @Override
     public void onHiddenChanged(boolean hidden) {
-        PLog.WriteLog(PLog.MAIN_TAG, "Home hidden: " + hidden);
+        //PLog.WriteLog(PLog.MAIN_TAG, "Home hidden: " + hidden);
     }
 
     @Override
@@ -75,27 +76,35 @@ public class CountryDetailFragment extends Fragment {
         ////////////////////////////////////////////////////////////////////////////
         //Handle network issue
         SwipeRefreshLayout content = parent.findViewById(R.id.country_detail_swipe_content);
-        View homeLoading = parent.findViewById(R.id.country_detail_loading);
-        View homeNodata = parent.findViewById(R.id.country_detail_network_error);
+        View loadingScreen = parent.findViewById(R.id.country_detail_loading);
+        View noDataScreen = parent.findViewById(R.id.country_detail_network_error);
 
         countryViewModel.isNoDataMode().observe(this, status -> {
+            PLog.WriteLog(PLog.MAIN_TAG, " isNoDataMode loading status: " + status);
+            content.setRefreshing(false);
             if (status) {
                 content.setVisibility(View.GONE);
-                homeNodata.setVisibility(View.VISIBLE);
+                noDataScreen.setVisibility(View.VISIBLE);
             } else {
                 content.setVisibility(View.VISIBLE);
-                homeNodata.setVisibility(View.GONE);
+                noDataScreen.setVisibility(View.GONE);
             }
 
         });
 
         countryViewModel.isNoDataRetryMode().observe(this, status -> {
+            PLog.WriteLog(PLog.MAIN_TAG, " isNoDataRetryMode loading status: " + status);
+            content.setRefreshing(false);
             if (status) {
-                homeLoading.setVisibility(View.VISIBLE);
-                homeNodata.setVisibility(View.GONE);
+                PLog.WriteLog(PLog.MAIN_TAG, " isNoDataRetryMode loading status 2: " + status);
+                loadingScreen.setVisibility(View.VISIBLE);
+                noDataScreen.setVisibility(View.GONE);
+                content.setVisibility(View.GONE);
             } else {
-                homeLoading.setVisibility(View.GONE);
-                homeNodata.setVisibility(View.VISIBLE);
+                PLog.WriteLog(PLog.MAIN_TAG, "isNoDataRetryMode loading status 3: " + status);
+                loadingScreen.setVisibility(View.GONE);
+                noDataScreen.setVisibility(View.VISIBLE);
+                content.setVisibility(View.VISIBLE);
             }
         });
 
@@ -181,6 +190,9 @@ public class CountryDetailFragment extends Fragment {
         TextView tv9 = parent.findViewById(R.id.fragment_country_detail_header_title);
         tv9.setText(country.getName());
 
+        ImageView iv = parent.findViewById(R.id.fragment_country_detail_flag);
+        new BitmapWorker(iv, country.getFlagRes()).execute();
+
         ////////////////////////////////////////////////////////////
         TextView tv10 = parent.findViewById(R.id.fragment_country_detail_active_cases);
         tv10.setText(AppUtils.formatNumber(item.getTotalCases() - item.getTotalDeaths() - item.getTotalRecovered()));
@@ -263,13 +275,7 @@ public class CountryDetailFragment extends Fragment {
 
         BarDataSet set1;
 
-        if (chart.getData() != null &&
-                chart.getData().getDataSetCount() > 0) {
-            set1 = (BarDataSet) chart.getData().getDataSetByIndex(0);
-            set1.setValues(entries);
-            chart.getData().notifyDataChanged();
-            chart.notifyDataSetChanged();
-        } else {
+
             set1 = new BarDataSet(entries, "Data Set");
 
             set1.setColors(colors);
@@ -284,7 +290,7 @@ public class CountryDetailFragment extends Fragment {
             data.setBarWidth(0.9f);
             chart.setData(data);
             chart.setFitBars(true);
-        }
+
 
         chart.invalidate();
     }

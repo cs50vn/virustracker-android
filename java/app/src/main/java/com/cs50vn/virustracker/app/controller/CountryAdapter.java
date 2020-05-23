@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cs50vn.virustracker.app.R;
 import com.cs50vn.virustracker.app.appmodel.AppViewModel;
 import com.cs50vn.virustracker.app.appmodel.CountryViewModel;
+import com.cs50vn.virustracker.app.controller.worker.BitmapWorker;
 import com.cs50vn.virustracker.app.model.online.Continent;
 import com.cs50vn.virustracker.app.model.online.Country;
 import com.cs50vn.virustracker.app.tracking.PLog;
@@ -87,7 +88,8 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
             tv.setText(String.valueOf(position + 1));
 
             ImageView iv = holder.iv;
-            iv.setImageResource(R.drawable.it);
+            new BitmapWorker(holder.iv, item.getFlagRes()).execute();
+            //iv.setImageResource(R.drawable.it);
 
             TextView tv1 = holder.tv1;
             tv1.setText(item.getName());

@@ -109,7 +109,6 @@ public class AppLoaderWorker extends AsyncTask<Context, Void, Void> {
 
                 }
 
-
             }  catch (Exception e) {
                 PLog.WriteLog(PLog.MAIN_TAG, "Could not parse version status !!!");
                 PLog.WriteLog(PLog.MAIN_TAG, e.toString());
@@ -117,7 +116,8 @@ public class AppLoaderWorker extends AsyncTask<Context, Void, Void> {
             }
 
         } else {
-
+            appRepository.setNoDataRetryMode(false);
+            appRepository.setNoDataMode(true);
         }
 
         return null;
@@ -141,8 +141,11 @@ public class AppLoaderWorker extends AsyncTask<Context, Void, Void> {
                     AppRepository.getInstance().getCountryRepository().setInternalCountryList(countryList);
                     AppRepository.getInstance().getCountryRepository().setInternalSearchCountryList(countryList);
 
-                    PLog.WriteLog(PLog.MAIN_TAG, continentList.size());
-                    PLog.WriteLog(PLog.MAIN_TAG, countryList.size());
+                    //PLog.WriteLog(PLog.MAIN_TAG, continentList.size());
+                    //PLog.WriteLog(PLog.MAIN_TAG, countryList.size());
+
+                    appRepository.setNoDataRetryMode(false);
+                    appRepository.setNoDataMode(false);
                 }
 
             } catch (Exception e) {
@@ -150,7 +153,8 @@ public class AppLoaderWorker extends AsyncTask<Context, Void, Void> {
             }
 
         } else {
-
+            appRepository.setNoDataRetryMode(false);
+            appRepository.setNoDataMode(true);
         }
 
 

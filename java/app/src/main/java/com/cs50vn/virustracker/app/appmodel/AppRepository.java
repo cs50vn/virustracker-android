@@ -1,5 +1,6 @@
 package com.cs50vn.virustracker.app.appmodel;
 
+import android.app.Activity;
 import android.content.Context;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -7,6 +8,7 @@ import com.cs50vn.virustracker.app.controller.AssetManager;
 import com.cs50vn.virustracker.app.controller.BitmapManager;
 import com.cs50vn.virustracker.app.model.online.Country;
 import com.cs50vn.virustracker.app.tracking.PLog;
+import com.cs50vn.virustracker.app.utils.AppUtils;
 import com.cs50vn.virustracker.app.utils.CountrySortEnum;
 
 import java.util.concurrent.TimeUnit;
@@ -53,6 +55,7 @@ public class AppRepository {
     private MutableLiveData<Object> exitApp;
 
     private Context ctx;
+    private Activity act;
 
     private int exitCount = 2;
     private HomeRepository homeRepository;
@@ -63,6 +66,7 @@ public class AppRepository {
 
     public void init(Context ctx) {
         this.ctx = ctx;
+        this.act = (Activity) ctx;
 
         homeRepository = new HomeRepository();
         countryRepository = new CountryRepository();
@@ -150,6 +154,9 @@ public class AppRepository {
     }
 
     public void goToCountryDetail(Country country) {
+        AppUtils.hideSoftKeyboard(act);
+        getCountryRepository().setNoDataRetryMode(true);
+        getCountryRepository().setInternalCountryDetail(country);
         setCountryDetailMode(true);
     }
 

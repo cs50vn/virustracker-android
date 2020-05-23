@@ -51,6 +51,8 @@ public class Country {
         this.timestamp = timestamp;
         this.continent = continent;
         this.itemList = itemList;
+        totalCasesRecent = new LinkedList<>();
+        totalDeathsRecent = new LinkedList<>();
     }
 
     public String getId() {

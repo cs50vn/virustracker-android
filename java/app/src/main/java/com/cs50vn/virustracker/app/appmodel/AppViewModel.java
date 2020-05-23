@@ -50,7 +50,7 @@ public class AppViewModel extends AndroidViewModel {
     }
 
     public void goToCountryDetail(Country country) {
-
+        appRepository.goToCountryDetail(country);
         new CountryDetailLoaderWorker().execute(country);
     }
 

@@ -26,4 +26,5 @@
     <string name="total_deaths_per_1pop">Total deaths per 1M</string>
     <string name="total_tests">Total tests</string>
     <string name="tests_per_1pop">Tests per 1M</string>
+    <string name="searchbox">Find a country</string>
 </resources>

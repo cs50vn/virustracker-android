@@ -1,6 +1,7 @@
 package com.cs50vn.virustracker.app.controller.worker;
 
 import android.os.AsyncTask;
+import android.os.SystemClock;
 
 import com.cs50vn.virustracker.app.APIRequest;
 import com.cs50vn.virustracker.app.appmodel.AppRepository;
@@ -22,7 +23,6 @@ public class CountryDetailLoaderWorker extends AsyncTask<Country, Void, Void> {
     protected Void doInBackground(Country... params) {
         Country country = params[0];
         appRepository = AppRepository.getInstance();
-        appRepository.goToCountryDetail(country);
 
         String data = APIRequest.getCountryDetail(country.getId());
         PLog.WriteLog(PLog.MAIN_TAG, data);
@@ -36,7 +36,8 @@ public class CountryDetailLoaderWorker extends AsyncTask<Country, Void, Void> {
 
                     appRepository.getCountryRepository().setInternalCountryDetail(c);
 
-                    PLog.WriteLog(PLog.MAIN_TAG, c);
+                    appRepository.getCountryRepository().setNoDataRetryMode(false);
+                    appRepository.getCountryRepository().setNoDataMode(false);
                 }
 
             } catch (Exception e) {
@@ -44,7 +45,8 @@ public class CountryDetailLoaderWorker extends AsyncTask<Country, Void, Void> {
             }
 
         } else {
-
+            appRepository.getCountryRepository().setNoDataRetryMode(false);
+            appRepository.getCountryRepository().setNoDataMode(true);
         }
 
         return null;

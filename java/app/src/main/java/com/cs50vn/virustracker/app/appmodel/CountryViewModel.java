@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 
 import com.cs50vn.virustracker.app.controller.worker.AppRefreshWorker;
 import com.cs50vn.virustracker.app.controller.worker.CountryDetailLoaderWorker;
+import com.cs50vn.virustracker.app.controller.worker.CountryDetailRefreshWorker;
 import com.cs50vn.virustracker.app.controller.worker.CountryLoaderWorker;
 import com.cs50vn.virustracker.app.model.online.Country;
 import com.cs50vn.virustracker.app.utils.CountryModeEnum;
@@ -58,15 +59,15 @@ public class CountryViewModel extends AndroidViewModel {
     //Country Detail section
 
     public LiveData<Boolean> isNoDataMode() {
-        return appRepository.isNoDataMode();
+        return appRepository.getCountryRepository().isNoDataMode();
     }
 
     public LiveData<Boolean> isNoDataRetryMode() {
-        return appRepository.isNoDataRetryMode();
+        return appRepository.getCountryRepository().isNoDataRetryMode();
     }
 
     public void reloadData(int type) {
-
+        new CountryDetailRefreshWorker().execute(type);
     }
 
 }

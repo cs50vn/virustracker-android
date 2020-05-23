@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.net.Uri;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -15,6 +16,8 @@ import com.cs50vn.virustracker.app.model.online.ImageRes;
 import com.cs50vn.virustracker.app.tracking.PLog;
 import com.cs50vn.virustracker.app.utils.AppConfig;
 import com.cs50vn.virustracker.app.utils.AppUtils;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -56,7 +59,6 @@ public class BitmapManager implements AssetManager {
             appDAO.deleteAssets();
             data.clear();
         }
-
     }
 
     @Override
@@ -76,7 +78,7 @@ public class BitmapManager implements AssetManager {
             try {
 
                 //Download image
-                String url = res.getUrl();
+                String url = "https://" + res.getUrl();
                 Bitmap bmp = ImageLoader.getInstance().loadImageSync(url);
 
                 if (bmp != null) {

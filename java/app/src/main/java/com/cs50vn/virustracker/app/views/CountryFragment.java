@@ -1,8 +1,10 @@
 package com.cs50vn.virustracker.app.views;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.TooltipCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
@@ -42,6 +44,15 @@ public class CountryFragment extends Fragment {
     }
 
     @Override
+    public void onHiddenChanged(boolean hidden) {
+        if (!hidden) {
+            EditText input = parent.findViewById(R.id.fragment_country_edittext);
+            countryViewModel.setCountryMode(CountryModeEnum.STANDARD);
+            input.setCursorVisible(false);
+        }
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         countryViewModel = ViewModelProviders.of(this).get(CountryViewModel.class);
@@ -52,12 +63,11 @@ public class CountryFragment extends Fragment {
 
         ////////////////////////////////////////////////////////////////////////////
         //Handle network issue
-        SwipeRefreshLayout content = parent.findViewById(R.id.country_swipe_content);
+        View content = parent.findViewById(R.id.fragment_country_content);
         View homeLoading = parent.findViewById(R.id.country_loading);
         View homeNodata = parent.findViewById(R.id.country_network_error);
 
         appViewModel.isNoDataMode().observe(this, status -> {
-            content.setRefreshing(false);
             if (status) {
                 content.setVisibility(View.GONE);
                 homeNodata.setVisibility(View.VISIBLE);
@@ -69,7 +79,6 @@ public class CountryFragment extends Fragment {
         });
 
         appViewModel.isNoDataRetryMode().observe(this, status -> {
-            content.setRefreshing(false);
             if (status) {
                 homeLoading.setVisibility(View.VISIBLE);
                 homeNodata.setVisibility(View.GONE);
@@ -84,9 +93,6 @@ public class CountryFragment extends Fragment {
             appViewModel.reloadData(0);
         });
 
-        content.setOnRefreshListener(() -> {
-            appViewModel.reloadData(1);
-        });
 
         ////////////////////////////////////////////////////////////////////////////
 
@@ -112,6 +118,7 @@ public class CountryFragment extends Fragment {
         input.setOnTouchListener((v, event) -> {
             PLog.WriteLog(PLog.MAIN_TAG, "Click on input ===");
             countryViewModel.setCountryMode(CountryModeEnum.SEARCH);
+            input.setCursorVisible(true);
             return false;
         });
 
@@ -137,6 +144,7 @@ public class CountryFragment extends Fragment {
         Button cancel = parent.findViewById(R.id.fragment_country_cancel_button);
         cancel.setOnClickListener(v -> {
             countryViewModel.setCountryMode(CountryModeEnum.STANDARD);
+            input.setCursorVisible(false);
 
         });
 
@@ -144,8 +152,10 @@ public class CountryFragment extends Fragment {
         FragmentManager manager = getChildFragmentManager();
 
         filter.setOnClickListener(v -> {
+            input.setCursorVisible(false);
+            TooltipCompat.setTooltipText(filter, this.getContext().getString(R.string.active_cases));
             FilterBottomSheet bs = new FilterBottomSheet();
-            bs.show(manager, "ds");
+            //bs.show(manager, "ds");
 
 
         });
@@ -158,6 +168,8 @@ public class CountryFragment extends Fragment {
         rv.setOnTouchListener((v, event) -> {
             PLog.WriteLog(PLog.MAIN_TAG, "recyclerview moved");
             hideSoftKeyboard(this.getActivity());
+            input.setCursorVisible(false);
+
             return false;
         });
 

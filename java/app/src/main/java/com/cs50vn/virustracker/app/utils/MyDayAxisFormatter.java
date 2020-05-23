@@ -22,14 +22,14 @@ public class MyDayAxisFormatter extends ValueFormatter {
     public String getFormattedValue(float value) {
 
         RecentItem item = list.get((int)value);
-        PLog.WriteLog(PLog.MAIN_TAG, item.getTimestamp());
+        //PLog.WriteLog(PLog.MAIN_TAG, item.getTimestamp());
 
         Calendar cal = Calendar.getInstance(Locale.ENGLISH);
         cal.setTimeInMillis(item.getTimestamp() * 1000);
         DateFormat formatter = new SimpleDateFormat("MMM-dd");
         String date = formatter.format(cal.getTime());
 
-        PLog.WriteLog(PLog.MAIN_TAG, date);
+        //PLog.WriteLog(PLog.MAIN_TAG, date);
         return date;
     }
 

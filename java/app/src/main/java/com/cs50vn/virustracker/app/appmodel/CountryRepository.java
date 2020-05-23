@@ -32,6 +32,11 @@ public class CountryRepository {
     private MutableLiveData<CountrySortEnum> countrySort;
     private CountrySortEnum internalCountrySort;
 
+    private MutableLiveData<Boolean> noDataMode;
+    private boolean internalNoDataMode = false;
+    private MutableLiveData<Boolean> noDataRetryMode;
+    private boolean internalNoDataRetryMode = false;
+
     public CountryRepository() {
         countryList = new MutableLiveData<>();
         internalCountryList = new LinkedList<>();
@@ -44,6 +49,9 @@ public class CountryRepository {
         internalCountryMode = CountryModeEnum.STANDARD;
         countrySort = new MutableLiveData<>();
         internalCountrySort = CountrySortEnum.TOTAL_CASES;
+
+        noDataMode = new MutableLiveData<>();
+        noDataRetryMode = new MutableLiveData<>();
     }
 
     public void sortCountryList(LinkedList<Country> list, CountrySortEnum type) {
@@ -135,5 +143,28 @@ public class CountryRepository {
         }
 
         setInternalSearchCountryList(list);
+    }
+
+    ////////////////////////////////////////////////////////////
+    //Network issue
+
+    public LiveData<Boolean> isNoDataMode() {
+        return noDataMode;
+    }
+
+    public void setNoDataMode(boolean status) {
+        this.internalNoDataMode = status;
+
+        noDataMode.postValue(internalNoDataMode);
+    }
+
+    public LiveData<Boolean> isNoDataRetryMode() {
+        return noDataRetryMode;
+    }
+
+    public void setNoDataRetryMode(boolean status) {
+        this.internalNoDataRetryMode = status;
+
+        noDataRetryMode.postValue(internalNoDataRetryMode);
     }
 }

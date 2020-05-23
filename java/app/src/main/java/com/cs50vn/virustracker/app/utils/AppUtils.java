@@ -1,11 +1,13 @@
 package com.cs50vn.virustracker.app.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.util.Base64;
+import android.view.inputmethod.InputMethodManager;
 
 import com.cs50vn.virustracker.app.appmodel.AppRepository;
 import com.cs50vn.virustracker.app.model.online.AppItem;
@@ -41,6 +43,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class AppUtils {
+
+    public static void hideSoftKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager =
+                (InputMethodManager) activity.getSystemService(
+                        Activity.INPUT_METHOD_SERVICE);
+        if (activity.getCurrentFocus() != null)
+            inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+    }
 
     public static Date convertUnixTimeToDate(long timestamp){
         return new Date(timestamp * 100);

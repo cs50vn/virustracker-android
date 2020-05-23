@@ -66,6 +66,8 @@
                     android:layout_marginBottom="4dp"
                     android:background="#979797" />
 
+
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/fragment_country_detail_info"
                     android:layout_width="match_parent"
@@ -324,25 +326,36 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:paddingTop="16dp"
+                    android:paddingBottom="24dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical" >
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        >
                         <TextView
+                            android:textSize="12dp"
+                            android:fontFamily="@font/opensans_bold"
                             android:gravity="center"
                             android:layout_weight="0.1"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="1"/>
                         <TextView
+                            android:textSize="12dp"
+                            android:fontFamily="@font/opensans_bold"
                             android:layout_weight="0.6"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="@string/active_cases"/>
                         <TextView
+                            android:textSize="12dp"
+                            android:fontFamily="@font/opensans_bold"
                             android:gravity="right"
                             android:id="@+id/fragment_country_detail_active_cases"
                             android:layout_weight="0.3"
@@ -352,19 +365,27 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp">
                         <TextView
+                            android:textSize="12dp"
+                            android:fontFamily="@font/opensans_bold"
                             android:gravity="center"
                             android:layout_weight="0.1"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="2"/>
                         <TextView
+                            android:textSize="12dp"
+                            android:fontFamily="@font/opensans_bold"
                             android:layout_weight="0.6"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="@string/serious_cases"/>
                         <TextView
+                            android:textSize="12dp"
+                            android:fontFamily="@font/opensans_bold"
                             android:gravity="right"
                             android:id="@+id/fragment_country_detail_serious_cases"
                             android:layout_weight="0.3"
@@ -374,19 +395,27 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp">
                         <TextView
+                            android:textSize="12dp"
+                            android:fontFamily="@font/opensans_bold"
                             android:gravity="center"
                             android:layout_weight="0.1"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="3"/>
                         <TextView
+                            android:textSize="12dp"
+                            android:fontFamily="@font/opensans_bold"
                             android:layout_weight="0.6"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="@string/total_cases_per_1pop"/>
                         <TextView
+                            android:textSize="12dp"
+                            android:fontFamily="@font/opensans_bold"
                             android:gravity="right"
                             android:id="@+id/fragment_country_detail_total_cases_per_1pop"
                             android:layout_weight="0.3"
@@ -396,19 +425,27 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp">
                         <TextView
+                            android:textSize="12dp"
+                            android:fontFamily="@font/opensans_bold"
                             android:gravity="center"
                             android:layout_weight="0.1"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="4"/>
                         <TextView
+                            android:textSize="12dp"
+                            android:fontFamily="@font/opensans_bold"
                             android:layout_weight="0.6"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="@string/total_deaths_per_1pop"/>
                         <TextView
+                            android:textSize="12dp"
+                            android:fontFamily="@font/opensans_bold"
                             android:gravity="right"
                             android:id="@+id/fragment_country_detail_total_deaths_per_1pop"
                             android:layout_weight="0.3"
@@ -418,19 +455,27 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp">
                         <TextView
+                            android:textSize="12dp"
+                            android:fontFamily="@font/opensans_bold"
                             android:gravity="center"
                             android:layout_weight="0.1"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="5"/>
                         <TextView
+                            android:textSize="12dp"
+                            android:fontFamily="@font/opensans_bold"
                             android:layout_weight="0.6"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="@string/total_tests"/>
                         <TextView
+                            android:textSize="12dp"
+                            android:fontFamily="@font/opensans_bold"
                             android:gravity="right"
                             android:id="@+id/fragment_country_detail_total_tests"
                             android:layout_weight="0.3"
@@ -440,8 +485,12 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp">
                         <TextView
+                            android:textSize="12dp"
+                            android:fontFamily="@font/opensans_bold"
                             android:gravity="center"
                             android:layout_weight="0.1"
                             android:layout_width="0dp"
@@ -449,11 +498,15 @@
 
                             android:text="6"/>
                         <TextView
+                            android:textSize="12dp"
+                            android:fontFamily="@font/opensans_bold"
                             android:layout_weight="0.6"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="@string/tests_per_1pop"/>
                         <TextView
+                            android:textSize="12dp"
+                            android:fontFamily="@font/opensans_bold"
                             android:gravity="right"
                             android:id="@+id/fragment_country_detail_tests_per_1pop"
                             android:layout_weight="0.3"

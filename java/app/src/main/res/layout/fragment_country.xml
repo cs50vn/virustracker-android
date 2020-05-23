@@ -8,201 +8,212 @@
     android:layout_marginRight="12dp"
     android:orientation="vertical">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/country_swipe_content"
+    <LinearLayout
+        android:id="@+id/fragment_country_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/fragment_country_content"
+        <TextView
+            android:id="@+id/fragment_country_title"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/opensans_extrabold"
+            android:text="Country"
+            android:textSize="36dp" />
 
-            <TextView
-                android:id="@+id/fragment_country_title"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/fargment_country_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/fragment_country_detail_area"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
-                android:fontFamily="@font/opensans_extrabold"
-                android:text="Country"
-                android:textSize="36dp" />
+                android:background="#fff"
+                app:elevation="0dp">
 
-            <androidx.coordinatorlayout.widget.CoordinatorLayout
-                android:id="@+id/fargment_country_content"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <com.google.android.material.appbar.AppBarLayout
-                    android:id="@+id/fragment_country_detail_area"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#fff"
-                    app:elevation="0dp">
+                    android:orientation="vertical"
+                    app:layout_scrollFlags="scroll|enterAlways|snap">
 
                     <LinearLayout
+                        android:paddingTop="12dp"
+                        android:id="@+id/country_2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_scrollFlags="scroll|enterAlways|snap">
-
-                        <LinearLayout
-                            android:id="@+id/country_2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                        android:orientation="horizontal">
 
 
-                            <EditText
-                                android:id="@+id/fragment_country_edittext"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.7"
-                                android:background="@android:color/darker_gray"
-                                android:cursorVisible="false"
-                                android:drawableLeft="@drawable/ic_search_16dp"
-                                android:fontFamily="@font/opensans_bolditalic"
-                                android:imeOptions="actionDone"
-                                android:inputType="text"
-                                android:lines="1"
-                                android:maxLines="1"
-                                android:textSize="10dp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintLeft_toLeftOf="parent"
-                                app:layout_constraintRight_toLeftOf="@id/fragment_country_cancel_button"
-                                app:layout_constraintTop_toTopOf="parent" />
+                        <EditText
+                            android:paddingLeft="8dp"
+                            android:paddingTop="2dp"
+                            android:paddingBottom="2dp"
+                            android:drawablePadding="10dp"
+                            android:id="@+id/fragment_country_edittext"
+                            android:layout_width="0dp"
+                            android:layout_height="28dp"
+                            android:layout_weight="0.7"
+                            android:background="@drawable/shadow"
 
-                            <Button
-                                android:id="@+id/fragment_country_filter_button"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.3"
-                                android:fontFamily="@font/opensans_bolditalic"
-                                android:text="@string/filter_title"
-                                android:textSize="10dp" />
+                            android:cursorVisible="false"
+                            android:drawableLeft="@drawable/ic_search_16dp"
+                            android:fontFamily="@font/opensans_bolditalic"
+                            android:imeOptions="actionDone"
+                            android:inputType="text"
+                            android:lines="1"
+                            android:maxLines="1"
+                            android:textSize="14dp"
+                            android:hint="@string/searchbox"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toLeftOf="@id/fragment_country_cancel_button"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                            <Button
+                        <Button
+                            android:id="@+id/fragment_country_filter_button"
+                            android:layout_width="0dp"
+                            android:layout_height="28dp"
+                            android:layout_weight="0.3"
+                            android:fontFamily="@font/opensans_bolditalic"
+                            android:text="@string/filter_title"
+                            android:textAllCaps="false"
+                            android:background="@drawable/shadow"
+                            android:layout_marginLeft="10dp"
+                            android:minHeight="0dp"
+                            android:minWidth="0dp"
+                            android:textSize="12dp" />
 
-                                android:id="@+id/fragment_country_cancel_button"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.3"
-                                android:fontFamily="@font/opensans_bolditalic"
-                                android:text="@string/cancel_title"
-                                android:textSize="10dp"
-                                android:visibility="gone" />
-                        </LinearLayout>
+                        <Button
 
-
+                            android:id="@+id/fragment_country_cancel_button"
+                            android:layout_width="0dp"
+                            android:layout_height="28dp"
+                            android:layout_weight="0.3"
+                            android:background="@drawable/shadow"
+                            android:layout_marginLeft="10dp"
+                            android:fontFamily="@font/opensans_bolditalic"
+                            android:text="@string/cancel_title"
+                            android:textAllCaps="false"
+                            android:textSize="12dp"
+                            android:minHeight="0dp"
+                            android:minWidth="0dp"
+                            android:visibility="gone" />
                     </LinearLayout>
 
 
-                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.05"
-                            android:fontFamily="@font/opensans_bold"
-                            android:text=""
-                            android:textSize="12dp" />
-
-                        <ImageView
-
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_marginLeft="6dp"
-                            android:layout_marginRight="10dp" />
-
-                        <TextView
+                </LinearLayout>
 
 
-                            android:layout_width="0dp"
-
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.4"
-                            android:ellipsize="end"
-                            android:fontFamily="@font/opensans_bold"
-                            android:maxLength="16"
-                            android:singleLine="true"
-                            android:textSize="10dp" />
-
-                        <TextView
-
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.15"
-                            android:drawableTop="@drawable/ic_info_8dp"
-                            android:fontFamily="@font/opensans_bolditalic"
-                            android:gravity="center"
-                            android:text="Cases"
-                            android:textSize="12dp" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.11"
-                            android:drawableTop="@drawable/ic_info_8dp"
-                            android:fontFamily="@font/opensans_bolditalic"
-                            android:gravity="center"
-                            android:text="New"
-                            android:textSize="12dp" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.11"
-                            android:drawableTop="@drawable/ic_info_8dp"
-                            android:fontFamily="@font/opensans_bolditalic"
-                            android:gravity="center"
-                            android:text="Deaths"
-                            android:textSize="12dp" />
-                    </LinearLayout>
-
-
-                </com.google.android.material.appbar.AppBarLayout>
-
-                <include
-                    android:id="@+id/home_offline_mode"
-                    layout="@layout/component_network_off"
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone" />
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp">
 
-                <androidx.core.widget.NestedScrollView
-                    android:id="@+id/nestedScroll"
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.05"
+                        android:fontFamily="@font/opensans_bold"
+                        android:text=""
+                        android:textSize="12dp" />
+
+                    <ImageView
+
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginRight="10dp" />
+
+                    <TextView
+
+
+                        android:layout_width="0dp"
+
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/opensans_bold"
+                        android:maxLength="16"
+                        android:singleLine="true"
+                        android:textSize="10dp" />
+
+                    <TextView
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.15"
+                        android:drawableTop="@drawable/ic_info_8dp"
+                        android:fontFamily="@font/opensans_bolditalic"
+                        android:gravity="center"
+                        android:text="Cases"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.11"
+                        android:drawableTop="@drawable/ic_info_8dp"
+                        android:fontFamily="@font/opensans_bolditalic"
+                        android:gravity="center"
+                        android:text="New"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.11"
+                        android:drawableTop="@drawable/ic_info_8dp"
+                        android:fontFamily="@font/opensans_bolditalic"
+                        android:gravity="center"
+                        android:text="Deaths"
+                        android:textSize="12dp" />
+                </LinearLayout>
+
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <include
+                android:id="@+id/home_offline_mode"
+                layout="@layout/component_network_off"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/nestedScroll"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/fragment_country_recyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:overScrollMode="never"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                    android:isScrollContainer="true">
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/fragment_country_recyclerview"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:isScrollContainer="true">
-
-                    </androidx.recyclerview.widget.RecyclerView>
-                </androidx.core.widget.NestedScrollView>
+                </androidx.recyclerview.widget.RecyclerView>
+            </androidx.core.widget.NestedScrollView>
 
 
-            </androidx.coordinatorlayout.widget.CoordinatorLayout>
-        </LinearLayout>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </LinearLayout>
 
     <!-- Loading section -->
 
     <include
         android:id="@+id/country_network_error"
-        layout="@layout/component_nodata"
+        layout="@layout/component_network_error"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone" />
